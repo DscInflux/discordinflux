@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Search Results</title>
+    <%- include('partials/head'); %>
+  </head><body class="d-flex flex-column min-vh-100">
+    
+    <%- include('partials/loader'); -%>
+    <%- include('partials/navbar'); -%>
+    <%- include('partials/searchjumbotron'); -%>
+ <div class="container mt-5">
+<div class="row text-center mt-5">
+    <div class="container-fluid">
+      <h2 class="text-center">
+        <i class="fad fa-search" style="--fa-primary-color: #ffffff; --fa-secondary-color: #222;"></i>
+        Search Results
+      </h2>
+      <div class="row justify-content-center mt-5">
+
+      <% if (users && users.length > 0) { %>
+ 
+    <% users.forEach(function(user) { %>
+      <div class="col-sm-3 mb-5 mx-5">
+      
+        <div class="card rounded-4 text-white shadow-lg shadow-lg p-99 card-normal" data-toggle="tooltip" data-placement="top" style="width: 364px; height: auto; background-color: #111; border-radius: 10px; overflow: hidden;">
+          
+  <div class="banner d-flex align-items-center" style="background-image: url('<%= user.cardbannerimage ? user.cardbannerimage : 'https://mediashare.ink/file/1683510439225.png' %>'); background-size: cover; height: 150px;" >
+    <div class="avatar-container mx-3">
+      <img style="border: 3px solid black;" src="<%= user.avatarUrl ? user.avatarUrl : 'https://discordinflux.xyz/assets/brands/image_k7x1vs.png' %>" class="avatar rounded-circle" alt="{{ERROR LOADING}}" onerror="this.onerror=null; this.src='https://discordinflux.xyz/assets/brands/image_k7x1vs.png'; this.style.border='none';" class="avatar rounded-circle" alt="profile picture" width="70" height="70">
+
+    </div>
+    <div class="text-white">
+      <h4 class="mb-0"><% if(user.username.length > 7) { %>
+          <%= user.username.slice(0, 7) + "." %><a style="color: #999;">#<%= user.discriminator %>
+            <% if (verifiedIds.includes(user.discordId)) { %>
+              <span id="verified-user"><i data-bs-placement="left" data-offset="20" data-bs-toggle="tooltip" class="fad fa-badge-check" style="--fa-primary-color: #ffffff; --fa-secondary-color: #5de1e8;"></i></span>
+            <% } %>
+          </a>
+        <% } else { %>
+          <%= user.username %><a style="color: #999;">#<%= user.discriminator %>
+            <% if (verifiedIds.includes(user.discordId)) { %>
+              <span id="verified-user"><i data-bs-placement="left" data-offset="20" data-bs-toggle="tooltip" class="fad fa-badge-check" style="--fa-primary-color: #ffffff; --fa-secondary-color: #5de1e8;"></i></span>
+            <% } %>
+          </a>
+        <% } %></h4>
+      <p class="mb-0"><% if (user.bio) { %>
+  <% if (user.bio.length > 68) { %>
+    <p class="card-text" style="color: white;"><%= user.bio.substring(0, 68) + "..." %></p>
+  <% } else { %>
+    <p class="card-text" style="color: white;"><%= user.bio %></p>
+  <% } %>
+<% } else { %>
+  <p class="card-text" style="color: white;">Unfortunately, there is no bio available for this user. The profile has not been set up yet.</p>
+<% } %></p>
+    </div>
+  </div>
+  <div class="card-body">
+   <div class="container">
+  <p class="card-text mb-3 text-white text-center">
+    <div class="d-flex justify-content-center align-items-center mt-3"><i class="fas fa-tags mb-2 mx-2" style="font-size: 10px;"></i>
+     <% if (user.tags && user.tags.length > 0) { %>
+  <% user.tags.forEach(function(tag) { %>
+    <span class="badge me-2 mb-2" style="background-color: #333; color: white;">
+      <a href="https://discordinflux.xyz/search?q=<%= tag %>" style="color: white; text-decoration: none;"><%= tag %></a>
+    </span>
+  <% }); %>
+<% } else { %>
+  <span class="badge me-2 mb-2" style="background-color: #333; color: white;">
+    None
+  </span>
+<% } %>
+
+
+    </div>
+  </p>
+</div>
+
+    <div class="d-flex justify-content-between">
+      <a href="https://discordapp.com/users/<%= user.discordId %>" target="_blank" class="btn flex-grow-1 me-2" style="background-color: #333; color: white;">Discord</a>
+      <a href="/user/<%= user.discordId %>" class="btn flex-grow-1 ms-2" style="background-color: #222; color: white;">View my Profile</a>
+    </div>
+
+  </div>
+</div>
+        
+      </div>
+      <% }); %>
+    </div>
+
+</div>
+  </div>
+<% } else { %>
+  <p class="text-center mt-2">No results found.</p>
+<% } %>
+
+
+    </div>
+  <%- include('partials/footer'); -%>
+
+  </body>
+</html>

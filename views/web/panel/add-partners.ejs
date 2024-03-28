@@ -1,0 +1,85 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - Add Partner</title>
+    <%- include('../partials/head'); -%>
+      
+    <style>
+      .card {
+        background-color: #f8f9fa;
+        border-radius: 20px;
+        border: none;
+      }
+
+      .form-control:focus {
+        border-color: #f8f9fa;
+        box-shadow: none;
+      }
+
+      .btn-primary {
+        background-color: #007bff;
+        border-color: #007bff;
+        border-radius: 20px;
+      }
+
+      .btn-primary:hover {
+        background-color: #0069d9;
+        border-color: #0062cc;
+      }
+    </style>
+</head>
+<body class="d-flex flex-column min-vh-100">
+  <%- include('../partials/loader'); -%>
+   
+    <%- include('../partials/navbar'); -%>
+    <script src="https://www.google.com/recaptcha/api.js"></script>
+    <div class="container mt-5 py-5">
+        <h1 class="text-center mb-5">Remove Partner</h1>
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card" style="background-color: #111;">
+                    <div class="card-body rounded-2" style="background-color: #111; color: white;">
+                       
+                        <form action="/admin/partners/add" method="POST">
+                          <div class="mb-3">
+                                <label for="name" class="form-label">Partner name:</label>
+                                <input type="text" class="form-control" id="name" name="name" placeholder="Partner name" value="" required>
+                            </div>     
+                           <div class="mb-3">
+                                <label for="description" class="form-label">Partner description:</label>
+                                  <textarea class="form-control" id="description" name="description" rows="4" required></textarea>
+
+                            </div>           
+                          <!--  <div class="mb-3">
+                                <label for="logo" class="form-label">Partner Logo:</label>
+                                  <input class="form-control" id="logoUrl" name="logoUrl" required></input>
+                                    
+
+                            </div>  -->
+                          <div class="mb-3">
+                                <label for="banner" class="form-label">Partner Banner:</label>
+                                  <input class="form-control" id="banner" name="banner" required></input>
+
+                            </div> 
+                           <div class="mb-3">
+                                <label for="websiteUrl" class="form-label">Website Url:</label>
+                                  <input class="form-control" id="websiteUrl" name="websiteUrl" required></input>
+
+                            </div>      
+                          <div class="g-recaptcha" id="submit"></div>
+                            <div class="text-center">
+                                <button data-sitekey="6Leuo2gmAAAAAI6a-lZ9D_QM_GKQEQDlWQ9mi3QW" data-callback='onSubmit' data-action='submit' type="submit" id="submit-button" style="background-color: #222; color: white;" class="btn px-5 mt-3 g-recaptcha">Add</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
+

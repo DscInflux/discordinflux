@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Terms of Service - DiscordInflux</title>
+  <%- include('../partials/head'); -%>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&family=Roboto+Condensed:wght@700&display=swap" rel="stylesheet">
+  <style>
+    .term-section {
+      padding: 20px;
+      border: 1px solid #ddd;
+      margin-bottom: 20px;
+      border-radius: 5px;
+    }
+
+    .term-title {
+      font-size: 24px;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    .term-content {
+      font-size: 16px;
+      line-height: 1.6;
+    }
+
+    .btn-section {
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    .btn-section a {
+      margin-right: 10px;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 500;
+      font-size: 16px;
+      padding: 10px 20px;
+      border-radius: 5px;
+      text-decoration: none;
+    }
+
+    .blink {
+      animation: blinker 1s infinite;
+    }
+
+    @keyframes blinker {
+      50% {
+        background-color: white;
+      }
+    }
+  </style>
+  <script>
+    function scrollToSection(id) {
+      var element = document.getElementById(id);
+      element.scrollIntoView({ behavior: 'smooth' });
+      element.classList.add('blink');
+      setTimeout(function () {
+        element.classList.remove('blink');
+      }, 1000);
+    }
+  </script>
+</head>
+<body class="d-flex flex-column min-vh-100">
+  <%- include('../partials/loader'); -%>
+  <%- include('../partials/navbar'); -%>
+  <div class="container">
+    <h1 class="text-center mt-5" style="font-family: 'Montserrat', sans-serif; font-family: 'Roboto Condensed', sans-serif;">DiscordInflux Terms of Service</h1>
+    <div class="btn-section">
+      <a class="btn txb" onclick="scrollToSection('website-protection')">Website Protection</a>
+      <a class="btn txb" onclick="scrollToSection('user-profile-safety')">User Profile Safety</a>
+      <a class="btn txb" onclick="scrollToSection('community-guidelines')">Community Guidelines</a>
+      <a class="btn txb" onclick="scrollToSection('terms-of-use')">Terms of Use</a>
+      <div class="mt-3">
+      <a class="btn txb" onclick="scrollToSection('disclaimer')">Disclaimer</a>
+      <a class="btn txb" onclick="scrollToSection('contact')">Contact</a>
+      </div>
+    </div>
+    <div class="term-section mt-5" id="website-protection">
+      <h2 class="term-title">Website Protection</h2>
+      <div class="term-content">
+        <p>DiscordInflux takes website protection seriously. We have implemented robust security measures, including Digital Millennium Copyright Act (DMCA) protocols, to safeguard our website and its content. Unauthorized copying, distribution, or replication of our website's materials is strictly prohibited.</p>
+        <p>Any attempts to breach our website's security or engage in illegal activities will be dealt with according to the applicable laws and regulations.</p>
+      </div>
+    </div>
+
+    <div class="term-section" id="user-profile-safety">
+      <h2 class="term-title">User Profile Safety</h2>
+      <div class="term-content">
+        <p>At DiscordInflux, we prioritize the safety and security of user profiles. To ensure a safe environment, we enforce strict guidelines and measures:</p>
+        <ul>
+          <li>Prohibition of posting virus-infected links or malicious content on user profiles.</li>
+          <li>Monitoring and moderation of user profiles to prevent harassment, spam, or any other form of harmful behavior.</li>
+          <li>Providing options for users to report and block any suspicious or inappropriate profiles.</li>
+          <li>Regular security audits and updates to protect user information from unauthorized access.</li>
+          <li>Reminding users not to share personal information, such as addresses, phone numbers, or financial details, on public channels or with unknown individuals.</li>
+        </ul>
+        <p>We encourage all users to maintain a responsible and respectful presence on DiscordInflux, promoting a positive community experience for everyone.</p>
+      </div>
+    </div>
+
+    <div class="term-section" id="community-guidelines">
+      <h2 class="term-title">Community Guidelines</h2>
+      <div class="term-content">
+        <p>DiscordInflux is committed to maintaining a safe and inclusive community. To foster a positive environment for all users, we have established the following community guidelines:</p>
+        <ul>
+          <li>Respect and be considerate of others' opinions, experiences, and identities.</li>
+          <li>Avoid engaging in personal attacks, hate speech, discrimination, or harassment.</li>
+          <li>Refrain from posting or sharing explicit, offensive, or inappropriate content.</li>
+          <li>Do not engage in spamming, trolling, or any disruptive behaviors.</li>
+          <li>Follow the instructions and guidelines provided by DiscordInflux staff and moderators.</li>
+        </ul>
+        <p>Failure to comply with these guidelines may result in warnings, temporary or permanent suspension, or other appropriate actions as deemed necessary.</p>
+      </div>
+    </div>
+
+    <div class="term-section" id="terms-of-use">
+      <h2 class="term-title">Terms of Use</h2>
+      <div class="term-content">
+        <p>Please review our Terms of Use carefully before using DiscordInflux:</p>
+        <ul>
+          <li>By accessing and using this website, you agree to comply with the Terms of Use.</li>
+          <li>Do not use DiscordInflux for any illegal or unauthorized activities.</li>
+          <li>We reserve the right to modify or terminate the services provided on this website at any time.</li>
+          <li>Content provided on DiscordInflux is for informational purposes only and should not be considered as professional advice.</li>
+          <li>DiscordInflux is not responsible for any damages or losses resulting from the use of this website.</li>
+        </ul>
+        <p>For a complete understanding of your rights and obligations, please read the full Terms of Use.</p>
+      </div>
+    </div>
+
+    <div class="term-section" id="disclaimer">
+      <h2 class="term-title">Disclaimer</h2>
+      <div class="term-content">
+        <p>The information provided on DiscordInflux is for general informational purposes only. We make no representations or warranties of any kind, express or implied, about the accuracy, reliability, suitability, or availability of the information contained on the website. Any reliance you place on such information is strictly at your own risk.</p>
+      </div>
+    </div>
+
+    <div class="term-section" id="contact">
+      <h2 class="term-title">Contact</h2>
+      <div class="term-content">
+        <p>If you have any questions, concerns, or feedback regarding our Terms of Service, please feel free to email us at <a href="mailto:support@topiclist.xyz">support@topiclist.xyz</a>. We highly appreciate your input and assure you that we will promptly respond to your inquiry.</p>
+      </div>
+    </div>
+  </div>
+  <%- include('../partials/footer'); -%>
+</body>
+</html>

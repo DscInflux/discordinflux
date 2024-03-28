@@ -1,0 +1,237 @@
+body {
+  font-family: 'Montserrat', sans-serif;
+  background-image: linear-gradient(to left, #040209, #0d0c0c);
+  color: white;
+  scroll-behavior: smooth;
+}
+    .anuphan {
+        font-family: 'Anuphan', sans-serif;
+    }
+
+    .montserrat {
+        font-family: 'Montserrat', sans-serif;
+    }
+
+.selector-for-some-widget {
+  box-sizing: content-box;
+}
+
+@keyframes moveUpDown {
+  0% {
+    transform: translateY(-20%);
+  }
+  50% {
+    transform: translateY(20px);
+  }
+  100% {
+    transform: translateY(-20%);
+  }
+}
+
+body::-webkit-scrollbar {
+  display: none;
+}
+
+
+.disabled {
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+@media only screen and (max-width: 768px) {
+  .disabled {
+    display: none;
+  }
+}
+
+#mysearchInput::placeholder {
+  color:#737373;
+}
+
+button:focus, button:active {
+  outline: none;
+}
+
+.txb {
+  background-color: #100e17;
+  color: #f1eff1;
+}
+.txb:hover {
+  background-color: #0a090d;
+  color: #ffffff;
+}
+
+.container-3 {
+  /* Add some space around the content */
+  padding: 10px;
+}
+
+.container-3 a {
+  /* Increase the font size of the link text */
+  font-size: 1.2em;
+}
+
+.container-3 i {
+  /* Decrease the font size of the icon */
+  font-size: 0.8em;
+}
+
+.hr-mtx {
+  background-color: #222;
+  width:60%;
+  margin: auto;
+  height: 25%;
+}
+
+.baicon {
+  padding: 4px;
+  font-size: 39px;
+}
+
+
+.dropdown-item:hover {
+  background-color: #222;
+}
+
+.dropdown-item:foce {
+  background-color:transparent;
+}
+
+.dropdown-menu {
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition: max-height 0.2s ease-in-out, opacity 0.2s ease-in-out;
+}
+
+.dropdown-menu.show {
+  max-height: 200px; /* adjust this value to fit your menu content */
+  opacity: 1;
+}
+
+::-webkit-scrollbar-track {
+  background-color: #f5f5f5; /* color of the scrollbar track */
+  border-radius: 10px; /* roundness of the scrollbar track */
+}
+
+::-webkit-scrollbar {
+  width: 10px; /* width of the scrollbar */
+  background-color: #f5f5f5; /* background color of the scrollbar */
+}
+ 
+::-webkit-scrollbar-thumb {
+  background-color: #000000; /* color of the scrollbar thumb */
+  border-radius: 10px; /* roundness of the scrollbar thumb */
+}
+ 
+::-webkit-scrollbar-thumb:hover {
+  background-color: #555; /* color of the scrollbar thumb on hover */
+}
+
+@media (min-width: 768px) {
+  .animate {
+    animation-duration: 0.3s;
+    -webkit-animation-duration: 0.3s;
+    animation-fill-mode: both;
+    -webkit-animation-fill-mode: both;
+  }
+}
+
+@keyframes slideIn {
+  0% {
+    transform: translateY(1rem);
+    opacity: 0;
+  }
+
+  100% {
+    transform: translateY(0rem);
+    opacity: 1;
+  }
+
+  0% {
+    transform: translateY(1rem);
+    opacity: 0;
+  }
+}
+
+@-webkit-keyframes slideIn {
+  0% {
+    -webkit-transform: transform;
+    -webkit-opacity: 0;
+  }
+
+  100% {
+    -webkit-transform: translateY(0);
+    -webkit-opacity: 1;
+  }
+
+  0% {
+    -webkit-transform: translateY(1rem);
+    -webkit-opacity: 0;
+  }
+}
+
+.slideIn {
+  -webkit-animation-name: slideIn;
+  animation-name: slideIn;
+}
+
+
+
+input:disabled {
+   background-color: #333;
+}
+
+.taghoverj {
+  background-color: #111; 
+  color: white; 
+  border-color: #222;
+}
+.taghoverj:hover {
+background-color: #1a1919;
+}
+
+.taghoverj:focus {
+background-color: #0f0e0e;
+}
+
+input:focus {
+border: none;
+border-color: #111;
+}
+
+.custom-file-input:focus~.custom-file-label {
+border-color: none;
+box-shadow: none;
+}
+
+.form-control:focus {
+  border-color: initial;
+  box-shadow: none;
+}
+
+
+.overflow-y-scroll {
+  overflow-y: auto;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* Internet Explorer and Edge */
+}
+
+.overflow-y-scroll::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, and Opera */
+}
+
+.txb-box {
+  background-color: #100e17;
+  color: white;
+}
+
+
+.mkl:hover {
+  background-color: #191625;
+}
+
+.mkl {
+  background-color: transparent;
+}
+

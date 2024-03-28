@@ -1,0 +1,105 @@
+<div class="jumbotron jumbotron-fluid  text-white py-5">
+    <div class="container text-center mt-3">
+        <h1 class="display-4 mb-3">Discord<span style="color: #90EDF8;"">Influx</span></h1>
+        <p class="lead mb-4" style="font-family: 'Montserrat', sans-serif; font-weight: 400; font-style: normal;">Find and add new friends on Discord the easy way</p>
+<!-- <p>There are currently <span id="num-users" class="counter" data-target="<%= numUsers %>"></span> users on the Discordinflux.</p> -->
+
+<script>
+  const counters = document.querySelectorAll('.counter');
+const speed = 1; // The lower the slower
+
+counters.forEach(counter => {
+	const updateCount = () => {
+		const target = +counter.getAttribute('data-target');
+		let count = +counter.innerText;
+
+		// Lower inc to slow and higher to slow
+		const inc = 1;
+
+		// console.log(inc);
+		// console.log(count);
+
+		// Check if target is reached
+		if (count < target) {
+			// Add inc to count and output in counter
+			count += inc;
+			counter.innerText = count;
+			// Call function every ms
+			setTimeout(updateCount, speed);
+		} else {
+			counter.innerText = target;
+		}
+	};
+
+	updateCount();
+});
+
+
+</script>
+<style>
+
+</style>
+<script src="https://cdn.jsdelivr.net/npm/countup.js"></script>
+        <form action="/search" method="get" class="d-flex justify-content-center mb-4">
+          <div class="input-group">
+            <input type="text" name="q" id="search-input" class="form-control form-control-lg rounded-3 mx-2 border-0 px-3 py-2" style="background-color: #111; color: white; width: 300px; font-size: 1.2rem;" placeholder="Find your discord soulmate!" onfocus="this.style.borderColor = 'initial'; this.style.boxShadow = 'none';">
+            <!--
+                          <button class="btn taghoverj rounded-4 px-4 py-2" style="font-size: 1.2rem;">Search</button>
+            -->
+          </div>
+          
+        </form>
+        <div class="d-flex justify-content-center align-items-end flex-wrap">
+            <span class="btn me-2 mb-2 tags px-3 py-2 border-end-5 taghoverj tags"><i class="fas fa-code mr-2"></i><a href="/search?q=developers" class="text-white text-decoration-none"> Developers</a></span>
+<span class="btn me-2 mb-2 tags px-3 py-2 border-end-5 taghoverj tags"><i class="fas fa-gamepad mr-2"></i><a href="/search?q=gaming" class="text-white text-decoration-none"> Gaming</a></span>
+<span class="btn me-2 mb-2 tags px-3 py-2 border-end-5 taghoverj tags"><i class="fas fa-gamepad mr-2"></i><a href="/search?q=roblox" class="text-white text-decoration-none"> Roblox</a></span>
+<span class="btn me-2 mb-2 tags px-3 py-2 border-end-5 taghoverj tags"><i class="fas fa-music mr-2"></i><a href="/search?q=music" class="text-white text-decoration-none"> Music</a></span>
+<span class="btn me-2 mb-2 tags px-3 py-2 border-end-5 taghoverj tags"><i class="fas fa-tv mr-2"></i><a href="/search?q=anime" class="text-white text-decoration-none"> Anime</a></span>
+<span class="btn me-2 mb-2 tags px-3 py-2 border-end-5 taghoverj tags"><i class="fas fa-futbol mr-2"></i><a href="/search?q=sports" class="text-white text-decoration-none"> Sports</a></span>
+<span class="btn me-2 mb-2 tags px-3 py-2 border-end-5 taghoverj tags"><i class="fas fa-paint-brush mr-2"></i><a href="/search?q=art" class="text-white text-decoration-none"> Art</a></span>
+<span class="btn me-2 mb-2 tags px-3 py-2 border-end-5 taghoverj tags"><i class="fas fa-graduation-cap mr-2"></i><a href="/search?q=study" class="text-white text-decoration-none"> Study</a></span>
+
+
+        </div>
+    </div>
+    
+</div>
+
+
+
+
+
+<script>
+  $(document).ready(function() {
+  $('#mysearchInput').on('keyup', function() {
+    var value = $(this).val().toLowerCase();
+    $('.tags a').filter(function() {
+      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    });
+  });
+});
+
+</script>
+ <!-- <div class="container container-3 text-center">
+  <div class="alert alert rounded-2 d-inline-block text-center mt-4" style="background-color:#111; color: white; border: white;">
+    <div class="container"><i class="fad fa-bell" style="font-size: 20px; --fa-primary-color: #d9aa59; --fa-secondary-color: #d9aa59;"></i><a> Notice: Website in Beta Mode - Please Report Any Issues to Our Discord Server!</a></div> 
+  </div>
+</div> -->
+
+<!-- <div class="container">
+  <div class="d-flex justify-content-center">
+    <div class="alert alert-dismissible fade show rounded-4" role="alert" style="background-color: #1f1d14; border: 3px solid #13130d; display: inline-block; padding: 1% 40px;">
+      <strong>
+      <span class="material-symbols-outlined mx-2 mb-2">
+celebration 
+</span> 
+      </strong>  Exciting News: Non-Verified Users Can Now Enhance Their Experience by Adding a Card Banner!  
+     <button type="button" class="close" data-dismiss="alert" aria-label="Close" style="background-color:transparent;border:none;color:white;">
+    <i class="far fa-times"></i>
+  </button>
+    </div>
+  </div>
+</div>-->
+<div class="container">
+  </div>
+</div>

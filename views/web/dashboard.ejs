@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Profile</title>
+    <%- include('partials/head'); -%>
+    <style>
+      .card {
+        background-color: #f8f9fa;
+        border-radius: 20px;
+        border: none;
+      }
+
+      .form-control:focus {
+        border-color: #f8f9fa;
+        box-shadow: none;
+      }
+
+      .btn-primary {
+        background-color: #007bff;
+        border-color: #007bff;
+        border-radius: 20px;
+      }
+
+      .btn-primary:hover {
+        background-color: #0069d9;
+        border-color: #0062cc;
+      }
+    </style>
+</head>
+<body class="d-flex flex-column min-vh-100">
+  <%- include('partials/loader'); -%>
+    <% if (authenticated) { %>
+        <%- include('partials/navbar'); -%>
+        <script src="https://www.google.com/recaptcha/api.js"></script>
+        <div class="container mt-5 py-5">
+            <h1 class="text-center mb-5"><i class="fad fa-user-edit" style="--fa-primary-color: #ffffff; --fa-secondary-color: #666;"></i> Edit Profile</h1>
+            <% if (error) { %>
+                <div class="alert alert-danger" role="alert">
+                    <%= error %>
+                </div>
+            <% } %>
+            <div class="row justify-content-center">
+              <div class="col-md-8">
+                <div class="card" style="background-color: #111;">
+                  <div class="card-body rounded-2" style="background-color: #111; color: white;">
+            <form action="/edit" method="POST"> 
+              <div class="row">
+                <div class="col">
+                  <label for="bio" class="form-label">Bio</label>
+                  <input type="text" class="form-control" placeholder="Enter your bio" aria-label="bio" name="bio" id="bio" value="<%= user.bio %>">
+                </div>
+                <div class="col">
+                  <label for="discordid" class="form-label">Discord ID</label>
+                  <input type="text" class="form-control disabled border-0" aria-label="discordid" id="discordid" style="background-color: #999;" name="discordid" placeholder="<%= authenticated.discordId %>" value="<%= authenticated.discordId %>" disabled aria-disabled="true">
+                </div>
+                <div class="mb-3 mt-4">
+                  
+                  <label for="aboutme" class="form-label">About Me <a style="color: #777;">-</a> <a style="color: #888">Add flair to your About Me section with allowed HTML.</a></label>
+                <!--  <div class="toolbar">
+                    <a href="#" onclick="editor.execCommand('selectAll'); return false;">Select All</a>
+                    <a href="#" onclick="editor.execCommand('indentMore'); return false;">Indent</a>
+                    <a href="#" onclick="editor.execCommand('indentLess'); return false;">Unindent</a>
+                    <a href="#" onclick="editor.execCommand('toggleComment'); return false;">Comment</a>
+                  </div>-->
+                  <textarea style="background-color: white; color: #444;"  class="form-control" placeholder="<%= user.aboutme %>" name="aboutme" id="aboutme" rows="5"  required markdown><%= user.aboutme %></textarea>
+                </div>
+                
+                
+                <div class="mb-3 mt-2 justify-content-center text-center">
+                  <h2>Socials </h2>
+                <hr style="width: 500px; margin: 0 auto;">
+                </div>
+                <div class="col">
+                  <label for="bio" class="form-label"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-github" viewBox="0 0 16 16">
+                    <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
+                  </svg> Github</label>
+                  <input type="text" class="form-control" placeholder="Enter your github link" aria-label="github" name="github" id="github" value="<%= user.github %>">
+                </div>
+                <div class="col">
+                  <label for="website" class="form-label">Website</label>
+                  <input type="text" class="form-control" aria-label="website" id="website" name="website" placeholder="https://" value="<%= user.website %>">
+                </div>
+                <div class="mb-3 mt-3 justify-content-center text-center">
+                  <h2>Banners URL </h2>
+                <hr style="width: 500px; margin: 0 auto;">
+                </div>
+   
+                <div class="col">
+                  <label for="cardbannerimage" class="form-label">Card Banner</label>
+                  <input type="text" class="form-control" placeholder="this is for the card banner" aria-label="cardbannerimage" name="cardbannerimage" id="cardbannerimage" value="<%= user.cardbannerimage %>">
+                </div>
+                <div class="col">
+                  <label for="bannerimage" class="form-label">Profile Banner</label>
+                  <input type="text" class="form-control" placeholder="Image url" aria-label="bannerimage" name="bannerimage" id="bannerimage" value="<%= user.bannerimage %>">
+                </div>
+
+                  <div class="mb-3 mt-3">
+                    <label for="tags" class="form-label">Profile Tags <a style="color: #777;">-</a> <a style="color: #888">Your tags, for example, example, example, example, belong here.</a></label>
+                    <input type="text" class="form-control" placeholder="Enter tags separated by commas" aria-label="tags" name="tags" id="tags" value="<%= user.tags %>">
+                  </div>
+              </div>
+
+              
+              
+              <button type="button" class="btn pull-right" style="background-color: #222; color: white; outline: none;" data-bs-toggle="modal" data-bs-target="#deleteProfileModal">
+                Delete Profile</button>
+                
+                
+
+                    <button data-sitekey="6Le1xrUlAAAAAHFC0lmD41_CYW98zlh64b1rvzgs" data-callback='onSubmit' data-action='submit' type="submit" id="submit-button" style="background-color: #222; color: white;" class="btn px-5 pull-left">Save Changes</button>
+              
+            </form>
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.62.2/codemirror.min.css">
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.62.2/theme/material-darker.min.css">
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.62.2/codemirror.min.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.62.2/mode/htmlmixed/htmlmixed.min.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.62.2/addon/edit/matchbrackets.min.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.62.2/addon/display/fullscreen.min.js"></script>
+            <style>
+              #aboutme {
+                height: 400px;
+                font-size: 14px;
+                border: 1px solid #ddd;
+              }
+        
+              .toolbar {
+                display: flex;
+                align-items: center;
+                background-color: #f8f8f8;
+                border-bottom: 1px solid #ddd;
+                padding: 5px;
+              }
+        
+              .toolbar button {
+                margin-right: 10px;
+                padding: 5px 10px;
+                font-size: 14px;
+                border: none;
+                background-color: #eee;
+                color: #444;
+                cursor: pointer;
+              }
+        
+              .toolbar button:hover {
+                background-color: #ddd;
+              }
+            </style>
+            <!--
+            <script>
+              var editor = CodeMirror.fromTextArea(document.getElementById('aboutme'), {
+                mode: 'htmlmixed',
+                lineNumbers: true,
+                matchBrackets: true,
+                theme: 'default',
+                lineWrapping: true,
+                tabSize: 2,
+                extraKeys: {
+                  "Esc": function(cm) {
+                    if (cm.getOption("fullScreen")) cm.setOption("fullScreen", false);
+                  }
+                }
+              });
+
+              if (!editor.getValue()) {
+  editor.setValue('Enter your code here');
+}
+
+// Clear the placeholder text when the editor gains focus
+editor.on('focus', function() {
+  if (editor.getValue() === 'Enter your code here') {
+    editor.setValue('');
+  }
+});
+
+// Set the placeholder text when the editor loses focus and is empty
+editor.on('blur', function() {
+  if (!editor.getValue()) {
+    editor.setValue('Enter your code here');
+  }
+});
+            </script>
+
+                     
+</div>-->
+
+<!-- Modal -->
+<div class="modal fade" id="deleteProfileModal" tabindex="-1" aria-labelledby="deleteProfileModalLabel" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
+  <div class="modal-dialog modal-dialog-centered rounded-3">
+    
+    <div class="modal-content text-white" style="background-color: #111; color: white;">
+      <div class="modal-header border-0">
+        <h5 class="modal-title" id="deleteProfileModalLabel">Delete Profile</h5>
+      </div>
+      <form method="POST" action="/delete-profile" onsubmit="return validateReason()">
+        <div id="error-message"></div>
+        <div class="modal-body">
+          <p>Are you certain that you want to delete your profile? Keep in mind that this action cannot be undone.</p>
+        </div>
+        <div class="modal-footer border-0">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+          <button type="submit" class="btn btn-danger" onclick="return validateDiscord()">Delete</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script>
+  function validateDiscord() {
+    const discordUsername = document.getElementById("discord-username").value.trim();
+    const discordTag = document.getElementById("discord-tag").value.trim();
+    if (discordUsername === "" || discordTag === "") {
+      const errorMessage = document.getElementById("error-message");
+      errorMessage.innerHTML = '<div class="alert alert-danger" role="alert">Please provide your Discord username and tag.</div>';
+      return false;
+    }
+    return true;
+  }
+</script>
+
+
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+              <script>
+function validateReason() {
+  var reasonInput = document.getElementById("reason");
+  var errorMessage = document.getElementById("error-message");
+  
+  if (reasonInput.value.trim() == "") {
+    errorMessage.innerHTML = '<div class="d-flex justify-content-center mx-2"><div class="alert alert-danger" role="alert">You need to provide a reason for deleting your profile.</div></div>';
+    reasonInput.focus();
+    return false;
+  } else {
+    errorMessage.innerHTML = '';
+    return true;
+  }
+}
+</script>
+<%- include('partials/footer'); -%>
+
+<script>
+    // Initialize the Markdown editor
+    var simplemde = new SimpleMDE({
+  element: document.getElementById("markdown-editor"),
+  toolbar: ["bold", "italic", "heading", "|", "quote", "unordered-list", "ordered-list", "|", "link", "image", "|", "table", "horizontal-rule", "|", "preview", "guide"],
+  fullscreen: false,
+  renderingConfig: {
+    codeSyntaxHighlighting: true
+  }
+});
+
+
+    // Set the initial value of the Markdown editor
+    var initialMarkdownValue = "# Hello, Everyone!";
+    document.getElementById("markdown-editor").value = initialMarkdownValue;
+  </script>
+<% }; %>
+
+
+
+  
+</html>

@@ -1,0 +1,26 @@
+<div class="jumbotron maintron maintron-plus mb-5 s6" style="background-color: transparent; color: white; padding: 24px;">
+  <div class="container mb-2">
+    <div class="row align-items-center">
+      <div class="col-md-6 order-md-2 order-1 disabled">
+        <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 1920 500" style="animation: moveUpDown 2s infinite; width: 100%; height: 100%;"><svg xmlns="http://www.w3.org/2000/svg" id="search" x="0" y="0" version="1.1" viewbox="0 0 29 29" xml:space="preserve">
+        <path d="M11.854 21.854c-5.514 0-10-4.486-10-10s4.486-10 10-10 10 4.486 10 10-4.486 10-10 10zm0-18c-4.411 0-8 3.589-8 8s3.589 8 8 8 8-3.589 8-8-3.588-8-8-8z" fill="#90EDF8"></path>
+        <path d="M26.146 27.146a.997.997 0 0 1-.707-.293l-7.694-7.694a.999.999 0 1 1 1.414-1.414l7.694 7.694a.999.999 0 0 1-.707 1.707z" fill="#90EDF8"></path></svg> </svg>
+      </div>
+      <div class="col-md-6">
+        <%if (!query) { %>
+        <h1 class="display-5 mb-0 mt-2">Search, <span style="color: #90EDF8;">Users</span></h1><%} else { %>
+        <h1 class="display-5 mb-0 mt-2">Search Results for <span style="color: #90EDF8;">"<%= query.slice(0, 8) + (query.length > 8 ? '...' : '') %>"</span></h1><!-- Display search results here -->
+        <%} %>
+        <div style="min-height:28px; color: white;" class="mb-2">
+          <p class="lead ml-1 text-damp text-bold mb-0">The User-Friendly Way to Easily Add New Friends on Discord</p>
+          <div class="">
+            <hr class="bg-white ml-0 mb-4" style="max-width:430px;">
+          </div>
+          <form action="/search" method="get">
+            <input name="q" class="form-control border-0 form-control-lg dark_cancel" style="background:#222;color: white;max-width:400px;" id="mysearchInput" placeholder="Flooded#0003">
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

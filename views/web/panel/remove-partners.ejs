@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - Remove Partner</title>
+    <%- include('../partials/head'); -%>
+    <style>
+      .card {
+        background-color: #f8f9fa;
+        border-radius: 20px;
+        border: none;
+      }
+
+      .form-control:focus {
+        border-color: #f8f9fa;
+        box-shadow: none;
+      }
+
+      .btn-primary {
+        background-color: #007bff;
+        border-color: #007bff;
+        border-radius: 20px;
+      }
+
+      .btn-primary:hover {
+        background-color: #0069d9;
+        border-color: #0062cc;
+      }
+    </style>
+</head>
+<body class="d-flex flex-column min-vh-100">
+  <%- include('../partials/loader'); -%>
+   
+    <%- include('../partials/navbar'); -%>
+    <script src="https://www.google.com/recaptcha/api.js"></script>
+    <div class="container mt-5 py-5">
+        <h1 class="text-center mb-5">Remove Partner</h1>
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card" style="background-color: #111;">
+                    <div class="card-body rounded-2" style="background-color: #111; color: white;">
+                        <% if (error) { %>
+                <div class="alert alert-danger" role="alert">
+                    <%= error %>
+                </div>
+            <% } %>
+                        <form action="/admin/partners/remove" method="POST">            
+                           <div class="mb-3">
+                                <label for="partnerName" class="form-label">Partner name:</label>
+                                <input type="text" class="form-control" id="partnerName" name="partnerName" placeholder="Partner name" value="">
+                            </div>              
+                          <div class="g-recaptcha" id="submit"></div>
+                            <div class="text-center">
+                                <button data-sitekey="6Leuo2gmAAAAAI6a-lZ9D_QM_GKQEQDlWQ9mi3QW" data-callback='onSubmit' data-action='submit' type="submit" id="submit-button" style="background-color: #222; color: white;" class="btn px-5 mt-3 g-recaptcha">Remove</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

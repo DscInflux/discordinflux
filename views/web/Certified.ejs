@@ -1,0 +1,18 @@
+<% users.forEach(user => { %>
+  <div class="user">
+    <div class="avatar">
+      <img src="<%= user.avatarUrl %>" alt="Avatar">
+    </div>
+    <div class="info">
+      <div class="username">
+        <%= user.username %>#<%= user.discriminator %>
+        <% if (user.isCertified) { %>
+          <span class="certified">certified</span>
+        <% } %>
+      </div>
+      <div class="score">
+        <%= user.score %> points
+      </div>
+    </div>
+  </div>
+<% }) %>

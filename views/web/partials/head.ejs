@@ -1,0 +1,249 @@
+ <title> DiscordInflux </title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anuphan&family=Montserrat:wght@800&display=swap" rel="stylesheet">
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+ <meta name="viewport" content="width=device-width, initial-scale=1">
+ 
+  <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.min.css">
+ <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.css">
+ <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap-grid.min.css">
+ <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap-grid.css">
+ <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap-reboot.min.css">
+ <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap-reboot.css">
+ <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap-utilities.min.css">
+ <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap-utilities.css">
+ <link rel="stylesheet" href="./node_modules/@fortawesome/fontawesome-free/css/all.css">
+<link href="https://pro.fontawesome.com/releases/v5.14.0/css/all.css" rel="stylesheet" crossorigin="anonymous"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" /><style>
+.material-symbols-outlined {
+  font-variation-settings:
+  'FILL' 0,
+  'wght' 400,
+  'GRAD' 0,
+  'opsz' 48
+}
+</style><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="icon" type="image/x-icon" href="/assets/brands/image_k7x0vs.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet">
+<script src="/assets/js/main.js"></script>
+<link rel="stylesheet" type="text/css" href="/assets/css/main.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/countup.js/2.0.7/countUp.min.js"></script>
+<script src="/assets/js/main.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#222">
+    <meta name="language" content="EN">
+    <meta name="distribution" content="global">
+    <meta name="rating" content="general">
+    <meta property="og:type" content="website">
+    <meta name="revisit-after" content="10 days">
+    <meta name="copyright" content="DesTools Studio">
+    <meta name="description" content="Find and add new friends on Discord the easy way">
+    <meta name="keywords" content="profiles, discord, friends">
+    <meta name="author" content="DesTools Studio">
+    <meta property="og:title" content="DiscordInflux">
+    <meta property="og:description" content="Find and add new friends on Discord the easy way">
+    <meta property="og:image" content="/assets/brands/image_k7x0vs.png">
+    <meta property="og:url" content="http://discordinflux.xyz">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@destoolsstudio">
+    <meta name="twitter:title" content="DiscordInflux">
+    <meta name="twitter:description" content="Find and add new friends on Discord the easy way">
+    <meta name="twitter:image" content="/assets/brands/image_k7x0vs.png">
+    
+
+  
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css">
+
+  <!-- Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+  <!-- SimpleMDE JS -->
+  <script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <!-- <script src="/assets/js/main.js"></script> -->
+
+<!--<style>
+  #loading-bar {
+    width: 0;
+    height: 5px;
+    background-color: #90EDF8;
+    transition: width 0.5s;
+  }
+</style>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    var links = document.getElementsByTagName('a');
+    var forms = document.getElementsByTagName('form');
+    var loadingBar = document.getElementById('loading-bar');
+
+    function startLoading(url) {
+      loadingBar.style.width = '0%'; // Reset the loading bar
+
+      // Scroll to the top of the page
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+
+      // Start loading animation after scrolling
+      setTimeout(function() {
+        var loadingInterval = setInterval(function() {
+          if (parseInt(loadingBar.style.width) < 100) {
+            loadingBar.style.width = parseInt(loadingBar.style.width) + 10 + '%';
+          } else {
+            clearInterval(loadingInterval);
+            // Simulate a delay for demonstration purposes
+            setTimeout(function() {
+              // Redirect to the target URL
+              window.location.href = url;
+            }, 500);
+          }
+        }, 100);
+      }, 500);
+    }
+
+    for (var i = 0; i < links.length; i++) {
+      links[i].addEventListener('click', function(event) {
+        var href = this.getAttribute('href');
+        var target = this.getAttribute('target');
+
+        if (!href || href === '#' || target === '_blank') {
+          return; // Skip if the href is empty, "#" or has target="_blank"
+        }
+
+        event.preventDefault(); // Prevent the default link behavior
+
+        var url = new URL(href, window.location.href);
+        startLoading(url.href);
+      });
+    }
+
+    for (var i = 0; i < forms.length; i++) {
+      forms[i].addEventListener('submit', function(event) {
+        var action = this.getAttribute('action');
+
+        if (!action) {
+          return; // Skip if the action attribute is empty
+        }
+
+        event.preventDefault(); // Prevent the default form submission behavior
+
+        var url = new URL(action, window.location.href);
+        url.search = new URLSearchParams(new FormData(this)).toString(); // Include form data as query parameters
+        startLoading(url.href);
+      });
+    }
+  });
+</script>
+
+
+
+  <div class="fixed-top" id="loading-bar"></div>-->
+<script>
+$(document).ready(function(){
+    $("#verified-user").tooltip({
+        title: "Trusted User",
+        placement: "right"
+    }); 
+});
+</script>
+  <style>
+    .tooltip-inner {
+      background-color: #222;
+      color: #fff;
+      box-shadow: 2px 2px 5px rgba(0,0,0,0.3);
+    }
+    .btn {
+      border:none !important;
+    }
+  </style>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+  <script>
+   $(document).ready(function() {
+      // Load the text color from the cookie and set it as the default color
+      var defaultTextColor = getTextColorCookie();
+      if (defaultTextColor) {
+        $('#change-text-color-display').css('color', defaultTextColor);
+      }
+      
+      // Handle the color change when the dropdown is clicked
+      $('.dropdown-menu a').click(function() {
+  var newColor = $(this).attr('id');
+  changeTextColor(newColor);
+});
+
+
+    function changeTextColor(color) {
+      // Apply the color to the text
+      $('#change-text-color-display').css('color', color);
+      
+      // Get the current text color of the element and set the cookie
+      var textColor = $('#change-text-color-display').css('color');
+      setTextColorCookie(textColor);
+    }
+
+    function setTextColorCookie(color) {
+      // Set a cookie with the text color that expires in 30 days
+      var expiryDate = new Date();
+      expiryDate.setDate(expiryDate.getDate() + 30);
+      var cookieValue = encodeURIComponent(color) + '; expires=' + expiryDate.toUTCString() + '; domain=' + window.location.hostname + '; path=/';
+      document.cookie = 'textColor=' + cookieValue;
+    }
+
+    function getTextColorCookie() {
+      // Get the value of the textColor cookie, if it exists
+      var cookieName = 'textColor=';
+      var cookieArray = document.cookie.split(';');
+      for (var i = 0; i < cookieArray.length; i++) {
+        var cookie = cookieArray[i];
+        while (cookie.charAt(0) == ' ') {
+          cookie = cookie.substring(1);
+        }
+        if (cookie.indexOf(cookieName) == 0) {
+          return decodeURIComponent(cookie.substring(cookieName.length, cookie.length));
+        }
+      }
+      return null;
+    }
+
+  </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+
+<script>
+    $(document).ready(function() {
+        $(".toast").toast('show');
+    });
+</script>
+<%- include('../offlineserver/offline'); -%>
+ <!-- <noscript>
+    
+function logRainbowMessage(message) {
+  const colors = ['255,0,0', '255,127,0', '255,255,0', '0,255,0', '0,0,255', '75,0,130', '143,0,255'];
+  const interval = 50;
+  let colorIndex = 0;
+  let animationFrameId;
+  function animate() {
+    const color = `rgb(${colors[colorIndex]})`;
+    console.clear();
+    console.log(`%c${message}`, `color:${color};font-weight:bold;font-size:24px;`);
+    colorIndex = (colorIndex + 1) % colors.length;
+    animationFrameId = requestAnimationFrame(animate);
+  }
+  animate();
+}
+logRainbowMessage('Flooded Was Here!');
+
+  </noscript>-->

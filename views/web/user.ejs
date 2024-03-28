@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Profile - <%= user.username %></title>
+    <%- include('partials/head'); -%>
+  </head>
+  <body class="d-flex flex-column min-vh-100">
+    <%- include('partials/loader'); -%>
+   
+    <%- include('partials/navbar'); -%><style>.center-screenv2 {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      min-height: 50vh;
+    }</style>
+    <div class="container mt-4 py-5">
+      <% if (!user.aboutme && !user.bio) { %>
+        <div class="container">
+          <div class="d-flex align-items-center justify-content-center center-screenv2">
+            <div class="text-center">
+              <h2 style="color: #ffffff;">This user profile is not set up</h2>
+              <% if (authenticated && authenticated.discordId !== user.discordId) { %>
+                <p style="color: #b35151;">If you are the profile owner, please go to the dashboard to set up your profile.</p>
+              <% } else { %>
+                <p style="color: #b35151;">If you are the profile owner, please go to the dashboard to set up your profile.</p>
+              <% } %>
+              
+              
+              <a href="/" class="btn mx-2" style="background-color: #222; color: #ffffff;">Home</a>
+              <a href="/dashboard" class="btn mx-2 txb">Dashboard</a>
+            </div>
+          </div>
+          <%- include('partials/footer'); -%>
+        </div>
+        
+      <% } else { %>
+       <% if (verified) { %>
+        
+        <% } else if (!user.aboutme.length && !user.bio.length) { %>
+<div class="container">
+  <div class="d-flex justify-content-center">
+    <div class="alert alert-dismissible fade show rounded-4" role="alert" style="background-color: #1f1414; border: 3px solid #130d0d; display: inline-block; padding: 1% 40px;">
+      <strong>
+        <i class="fad fa-exclamation-triangle" style="font-size: 20px; --fa-primary-color: #ffffff; --fa-secondary-color: #b57373;"></i>
+      </strong> You shouldn't click on every link on this user page. The user is not trusted and may send harmful links.  
+     <button type="button" class="close" data-dismiss="alert" aria-label="Close" style="background-color:transparent;border:none;color:white;">
+    <i class="far fa-times"></i>
+  </button>
+    </div>
+  </div>
+</div>
+            <% } %>
+
+
+
+      <div class="row">
+        <div class="row">
+          <div class="col-lg-8">
+            <div class="card mb-4 shadow-lg shadow-lg p-6 rounded-3 border-0 rounded-top mx-auto" style="background-color: #111;">
+              <div class="container">
+                <div class="row">
+                  <% if (user.bannerimage) { %>
+
+                    <div class="col-md-12 banner" style="background-image: url('<%= user.bannerimage ? user.bannerimage : 'https://mediashare.ink/file/1683510439225.png' %>');
+                      background-size: cover;
+                      height: 200px;
+                      border-top-left-radius: 10px;
+                      border-top-right-radius: 10px;"></div>
+                  <% } else { %>
+                    <div class="col-md-12 " style="background-image: url('https://mediashare.ink/file/1683510439225.png');
+                      background-size: cover;
+                      height: 200px;
+                      border-top-left-radius: 10px;
+                      border-top-right-radius: 10px;"></div>
+                    <% } %>
+                  
+                </div>
+             
+                    <style type="text/css">
+
+      .avatar {
+        height: 100px;
+        width: 100px;
+        border-radius: 50%;
+        margin-top: -50px;
+        border: 5px solid #000;
+      }
+    </style>
+  
+                <div class="row justify-content-center mt-4">
+                  <div class="col-md-3 mb-4 mx-5" style="width: 298px;">
+                    <div class="avatar-container text-center">
+                      <img src="<%= user.avatarUrl %>" alt="{{ERROR LOADING}}" onerror="this.onerror=null; this.src='https://discordinflux.xyz/assets/brands/image_k7x1vs.png'; this.style.border='none';" style="background-color: #222;" class="avatar rounded-4 mx-auto d-block">
+                    </div>
+                    <h4 class="text-center mt-2 text-white"><% if(user.username.length > 10) { %>
+  <%= user.username.slice(0, 10) + ".." %><a style="color: #444;">#<%= user.discriminator %> </a>
+<% } else { %>
+  <%= user.username %><a style="color: #444;">#<%= user.discriminator %> </a>
+<% } %>
+</h4>
+                      <% if (user.bio) { %>
+                    <p class="text-center text-white"><%= user.bio %></p>
+                    <% } else { %>
+                      <p class="text-center text-white">Unfortunately, there is no bio available for this user. The profile has not been set up yet.</p>
+                    <% } %>
+                  </div>
+                  <div class="col-md-6 text-center mt-3" style="color: white;">
+                    <h2>
+                      Socials</h2>
+                    <hr>
+
+
+                    <% if (user.website) { %>
+          <a href="<%= user.website %>" target="_blank" class="btn" style="background-color: #222; color: white;">Website</a>
+      <% } else { %>
+      <% } %>
+                           
+
+         <% if (user.github) { %>
+          <a href="<%= user.github %>" target="_blank" class="btn" style="background-color: #222; color: white;"><i class="fab fa-github"></i></a>
+      <% } else { %>
+      <% } %>
+         <a type="button" href="https://discordapp.com/users/<%= user.discordId %>" target="_blank" class="btn" style="background-color: #222; color: white;"><span><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-discord " viewBox="0 0 16 16">
+  <path class="mx-1" d="M13.545 2.907a13.227 13.227 0 0 0-3.257-1.011.05.05 0 0 0-.052.025c-.141.25-.297.577-.406.833a12.19 12.19 0 0 0-3.658 0 8.258 8.258 0 0 0-.412-.833.051.051 0 0 0-.052-.025c-1.125.194-2.22.534-3.257 1.011a.041.041 0 0 0-.021.018C.356 6.024-.213 9.047.066 12.032c.001.014.01.028.021.037a13.276 13.276 0 0 0 3.995 2.02.05.05 0 0 0 .056-.019c.308-.42.582-.863.818-1.329a.05.05 0 0 0-.01-.059.051.051 0 0 0-.018-.011 8.875 8.875 0 0 1-1.248-.595.05.05 0 0 1-.02-.066.051.051 0 0 1 .015-.019c.084-.063.168-.129.248-.195a.05.05 0 0 1 .051-.007c2.619 1.196 5.454 1.196 8.041 0a.052.052 0 0 1 .053.007c.08.066.164.132.248.195a.051.051 0 0 1-.004.085 8.254 8.254 0 0 1-1.249.594.05.05 0 0 0-.03.03.052.052 0 0 0 .003.041c.24.465.515.909.817 1.329a.05.05 0 0 0 .056.019 13.235 13.235 0 0 0 4.001-2.02.049.049 0 0 0 .021-.037c.334-3.451-.559-6.449-2.366-9.106a.034.034 0 0 0-.02-.019Zm-8.198 7.307c-.789 0-1.438-.724-1.438-1.612 0-.889.637-1.613 1.438-1.613.807 0 1.45.73 1.438 1.613 0 .888-.637 1.612-1.438 1.612Zm5.316 0c-.788 0-1.438-.724-1.438-1.612 0-.889.637-1.613 1.438-1.613.807 0 1.451.73 1.438 1.613 0 .888-.631 1.612-1.438 1.612Z"/>
+</svg> </span></a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="col-lg-4">
+            <div class="container card mb-4 mb-lg-0 shadow-lg shadow-lg p-6 border-0" style="background-color: #111; color: white; width: 120%; height: 90%">
+              <div class="card-body p-3 p-md-4 text-center">
+                <h2 class="mb-4">
+                  Analytics</h2>
+                <hr class="mb-4">
+                <div class="row">
+                  <div class="col-sm-5 col-md-6"><h3>Profile Views<a style="color: #999">:</a></h3></div>
+                  <div class="col-sm-5 offset-sm-2 col-md-6 offset-md-0"><div id="view-count" class="tooltipped" data-toggle="tooltip" data-placement="bottom" data-title="View count">
+                    <i class="fas fa-eye"></i>
+                    <span class="count"><%= user.viewCount %></span>
+                  </div>
+                  
+                  </div>
+                </div>
+                
+                <div class="row">
+                  <div class="col-sm-5 col-md-6"><h3>Profile Likes<a style="color: #999">:</a></h3></div>
+                  <div id="like-count" class="col-sm-6 col-md-5 offset-md-2 col-lg-6 offset-lg-0"><i class="fas fa-thumbs-up"></i> <%= user.likeCount %></div>
+                </div>
+                <hr>
+                                      <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<div>
+  <button id="download-btn" class="btn" style="background-color: #222; color: white;">Download Data as TXT</button>
+</div>
+                <div class="d-flex justify-content-center align-items-center" style="height: 130px;">
+                  <canvas id="monthlyViewCountsChart"></canvas>
+                </div>
+                
+                <br>
+                  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+                  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+                  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+
+<script>
+  const MadebyDestools = 'View Count For <%= user.username %>#<%= user.discriminator %>';
+  const downloadBtn = document.getElementById('download-btn');
+  downloadBtn.addEventListener('click', () => {
+    const monthlyViewCounts = <%= JSON.stringify(user.monthlyViewCounts) %>;
+    const data = `${MadebyDestools}\n\n` + monthlyViewCounts.reduce((acc, val, idx) => {
+      return acc + `Month ${idx + 1}: ${val}\n`;
+    }, '');
+    const message = 'Join our Discord server to learn more about view perks! https://discordinflux.xyz/support';
+    const filename = 'monthly-view-counts.txt';
+    const file = new Blob([data, message], {type: 'text/plain'});
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(file);
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+  });
+</script>
+
+
+<script>
+  // Get the monthly view counts from the server
+  const monthlyViewCounts = <%= JSON.stringify(user.monthlyViewCounts) %>;
+
+  // Define the chart data
+  const data = {
+    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+    datasets: [{
+      label: 'Monthly View Counts',
+      data: monthlyViewCounts,
+      backgroundColor: 'rgba(54, 162, 235, 0.2)',
+      borderColor: 'rgba(54, 162, 235, 1)',
+      borderWidth: 1
+    }]
+  };
+
+  // Reset the monthly view counts to 0 at the start of each year
+  const now = new Date();
+  const currentMonth = now.getMonth();
+  if (currentMonth === 0) { // January
+    for (let i = 0; i < monthlyViewCounts.length; i++) {
+      monthlyViewCounts[i] = 0;
+    }
+  }
+
+  // Create the chart
+  const ctx = document.getElementById('monthlyViewCountsChart').getContext('2d');
+  const chart = new Chart(ctx, {
+    type: 'bar',
+    data: data,
+    options: {
+      responsive: true,
+      scales: {
+        yAxes: [{
+          ticks: {
+            beginAtZero: true
+          }
+        }]
+      }
+    }
+  });
+</script>
+
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-8">
+            <div class="card mb-4 shadow-lg shadow-lg p-6 border-0" style="background-color: #111; color: white;">
+              <div class="card-body" style="height: auto;">
+                <div class="container  py-3" style="color: white;">
+                  <h2 class="text-center">About Me</h2>
+                  <hr>
+                  <% if (user.aboutme) { %>
+                    <%- user.aboutme %>
+                  <% } else { %>
+                    Unfortunately, there is no aboutme available for this user. The profile has not been set up yet.
+                  <% } %>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <div class="card mb-4 shadow-lg shadow-lg p-6 border-0" style="background-color: #111; color: white;">
+              <div class="card-body text-center">
+                <h2 class="mb-4">Badges</h2>
+                <hr class="mb-4">
+                <% if (testaccount) { %>
+                      <i class="fad fa-robot" style="--fa-primary-color: #eaeaec; --fa-secondary-color: #777; font-size: 2em;"></i>
+                    <% } %>
+                
+                <% if (admin) { %>
+                  <span id="admin-user" class="d-inline-block" title="Admin" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-container=".custom-tooltip-container">
+                    <i class="fad fa-user-crown mx-1" style="--fa-primary-color: #ffffff; --fa-secondary-color: #974f4f; font-size: 2em;"></i>
+                  </span>
+                  <% } else { %>
+                    <span id="user" class="d-inline-block" title="normal user" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-container=".custom-tooltip-container">
+                      <i class="fad fa-user mx-1" style="--fa-primary-color: #ffffff; --fa-secondary-color: #974f4f; font-size: 2em;"></i>
+                    </span>
+                  <% } %>
+<% if (developer) { %>
+   <span id="user" class="d-inline-block" title="Developer" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-container=".custom-tooltip-container"> 
+                      <i class="fad fa-brackets-curly mx-1" style="font-size: 2em;"></i>
+                    </span>
+<% } %><% if (verified) { %>
+                       <span id="user" class="d-inline-block" title="Trusted User" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-container=".custom-tooltip-container">
+                         <i  data-bs-placement="left" data-offset="20" data-bs-toggle="tooltip" class="fad fa-badge-check" style="--fa-primary-color: #ffffff; --fa-secondary-color: #5de1e8; font-size: 2em;"></i></span>
+                    <% } %>
+                      <% if (verifiedpartners) { %>
+                      <span id="verified-partners" class="d-inline-block" title="Partner user" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-container=".custom-tooltip-container">
+                         <i  data-bs-placement="left" data-offset="20" data-bs-toggle="tooltip" class="fad fa-handshake-alt fa-sm" style="--fa-primary-color: #ffffff; --fa-secondary-color: #cfcb63; font-size: 2em;"></i></span>
+                    <% } %>
+                  <div class="custom-tooltip-container"></div>
+                  
+                  <script>
+                    var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+                    var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+                      return new bootstrap.Tooltip(tooltipTriggerEl, {
+                        container: '.custom-tooltip-container'
+                      })
+                    })
+
+                    
+                  </script>
+                  
+                            
+                </div>
+              </div>
+                    <div class="card mb-4 shadow-lg shadow-lg p-6 border-0" style="background-color: #111; color: white;">
+                      <% if (authenticated && authenticated.discordId !== user.discordId) { %>
+              <div class="card-body text-center">
+                  <div class="row">
+                    <div class="col-md-6">
+                      <form method="POST" action="/user/<%= user.discordId %>/like">
+                        <button type="submit" href="#" class="btn btn-block disabled" style="background-color: #222; color: white;">
+                          <i class="fas fa-heart" style="--fa-primary-color: #ffffff; --fa-secondary-color: #ffffff;"></i> Like
+                        </button>
+                      </form>
+                    </div>
+                    <div class="col-md-6">
+                      <button type="button" href="#" class="btn btn-block" data-bs-toggle="modal" data-bs-target="#reportProfileModal" style="background-color: #9b5a5a; color: white;">
+                        <i class="fas fa-flag" style="--fa-primary-color: #ffffff; --fa-secondary-color: #ffffff;"></i> Report User
+                      </button>
+                    </div>
+                  </div>                    
+                </div>
+                <% } %>
+              </div>
+            </div>
+            
+          
+    
+    
+    </ul>
+  
+
+    <style>
+      /* Define CSS styles for the tooltip */
+      .tooltip {
+        position: relative;
+        display: inline-block;
+      }
+
+      .tooltip .tooltiptext {
+        visibility: hidden;
+        width: 120px;
+        background-color: black;
+        color: #fff;
+        text-align: center;
+        border-radius: 6px;
+        padding: 5px;
+        position: absolute;
+        z-index: 1;
+        bottom: 100%;
+        left: 50%;
+        margin-left: -60px;
+        opacity: 0;
+        transition: opacity 0.3s;
+      }
+
+      .tooltip .tooltiptext::after {
+        content: "";
+        position: absolute;
+        top: 100%;
+        left: 50%;
+        margin-left: -5px;
+        border-width: 5px;
+        border-style: solid;
+        border-color: black transparent transparent transparent;
+      }
+
+      .tooltip:hover .tooltiptext {
+        visibility: visible;
+        opacity: 1;
+      }
+
+      /* Define CSS classes for the different view count ranges */
+      .red {
+        color: red;
+      }
+
+      .yellow {
+        color: yellow;
+      }
+
+      .green {
+        color: white;
+      }
+    </style>
+
+<script>
+  const viewCount = document.getElementById('view-count');
+  const count = <%= user.viewCount %>;
+  let countIcon;
+  
+  if (count < 10) {
+    viewCount.classList.add('#111');
+    countIcon = 'exclamation-circle';
+    viewCount.querySelector('.tooltiptext').innerText = 'Danger: This user has very low views.';
+  } else if (count >= 50 && count <= 1000) {
+    viewCount.classList.add('yellow');
+    countIcon = 'exclamation-triangle';
+    viewCount.querySelector('.tooltiptext').innerText = 'Warning: This user has a moderate number of views.';
+  } else {
+    viewCount.classList.add('green');
+    countIcon = 'check-circle';
+    viewCount.querySelector('.tooltiptext').innerText = 'Success: This user has a high number of views.';
+  }
+  
+  const iconElement = document.createElement('i');
+  iconElement.classList.add('fas', `fa-${countIcon}`);
+  viewCount.insertBefore(iconElement, viewCount.firstChild);
+</script>
+
+
+<script>
+  $(document).ready(function(){
+    $('[data-toggle="tooltip"]').tooltip(); 
+  });
+</script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<% if (error && error.length > 0) { %>
+  <% error.forEach((errorMsg) => { %>
+    <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 9999;">
+      <div class="toast align-items-center border-2 border-danger txb" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="d-flex">
+          <div class="toast-body">
+            <%= errorMsg %>
+          </div>
+          <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+      </div>
+    </div>
+  <% }); %>
+<% } %>
+
+<% if (success && success.length > 0) { %>
+  <% for (let i = 0; i < success.length; i++) { %>
+    <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 9999;">
+      <div class="toast align-items-center border-2 border-success txb" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="d-flex">
+          <div class="toast-body">
+            <%= success[i] %>
+          </div>
+          <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+      </div>
+    </div>
+  <% } %>
+<% } %>
+<div class="modal fade" id="reportProfileModal" tabindex="-1" aria-labelledby="reportProfileModalLabel" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
+  <div class="modal-dialog modal-dialog-centered rounded-3">
+    <div class="modal-content text-white" style="background-color: #111; color: white;">
+      <div class="modal-header border-0">
+        <h5 class="modal-title" id="reportProfileModalLabel">Report User Profile</h5>
+      </div>
+      <% if (errorMessages.length > 0) { %>
+        <div class="alert alert-danger mt-5" role="alert">
+          <% errorMessages.forEach(message => { %>
+            <p><%= message %></p>
+          <% }); %>
+        </div>
+      <% } %>
+  
+      <% if (successMessages.length > 0) { %>
+        <div class="alert alert-success mt-5" role="alert">
+          <% successMessages.forEach(message => { %>
+            <p><%= message %></p>
+          <% }); %>
+        </div>
+      <% } %>
+      <form method="POST" action="/user/<%= user.discordId %>/report" onsubmit="return validateReason()">
+        <div id="error-message"></div>
+        <div class="modal-body">
+          <p>You are reporting <%= user.username %>. Please tell us how they are violating our terms of service.</p>
+          <label for="reason">Reason:</label>
+          <textarea name="reason" id="reason" class="form-control" rows="4" cols="50" required></textarea>
+        </div>
+        <div class="modal-footer border-0">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+          <button type="submit" class="btn btn-danger" onclick="return validateDiscord()">Report</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<% } %>
+  </body>
+</html>
+
+
+        <!-- Include jQuery -->
+<script src="https://code.jquery.com/jquery-3.6.0.slim.min.js" integrity="sha384-Ha4SyNT+1+F1aaXxGYbri2m6bwh63cOJqvaCsoY1tA3hcl2ayeQK6QR8J6c5IkM2" crossorigin="anonymous"></script>
+
+<!-- Include Popper.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.3/umd/popper.min.js" integrity="sha512-yskUrqQgU2xhBd7HIn75wZunz2d0g1/sGz1aXf/XN0JgSSoNcdGjL3qz3G4t4ZOMfjZ/bAGm/yJXm1SAbSjLg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<!-- Include Bootstrap JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.min.js" integrity="sha512-pxKPcMfZLOX9fQtwRbSdcF/kkLKUhH12c0QbR8w1NOZBNzVEZGmiX9q0B8WlMVl7m/u0l+O5ue1uYzGLZ/7VZw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+
+</section>
+

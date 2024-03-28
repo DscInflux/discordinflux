@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <%- include('partials/head'); -%>
+    <!-- Add Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css" integrity="sha512-QjDrG+pT+QENfE8I/FuLbk6Uog7VUHv6Uc7pGmT6TJmV2QIe8E7O2tyeB3qKfSdSf0XkAnNbzRzjKh7BXb4w4w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+      
+  </head>
+  <body class="d-flex flex-column min-vh-100">
+    <%- include('partials/loader'); -%>
+    <%- include('partials/navbar'); -%>
+      
+      <%- include('partials/jumbotron'); -%>
+
+<div class="container mt-5">
+
+<div class="mt-5">
+<div class="row  mt-5">
+  <div class="col-auto">
+        <h3 class="mb-1">Top 3 Liked</h3>
+        <h5 class="text-damp">Get to Know the top 3 liked users on DiscordInflux!</h5>
+      </div>
+ 
+    </div>
+      <!-- liked Users Section -->
+    <div class="container mt-5">
+<div class="row justify-content-center mt-5">
+     <% topUsersLiked.forEach(function(user) { %>
+
+
+<div class="col-sm-3 mb-5 mx-5">
+      
+        <div class="card rounded-4 text-white shadow-lg shadow-lg p-99 card-normal" data-toggle="tooltip" data-placement="top" style="width: 364px; height: auto; background-color: #111; border-radius: 10px; overflow: hidden;">
+          
+  <div class="banner d-flex align-items-center" style="background-image: url('<%= user.cardbannerimage ? user.cardbannerimage : 'https://mediashare.ink/file/1683510439225.png' %>'); background-size: cover; height: 150px;" >
+    <div class="avatar-container mx-3">
+      <img style="border: 3px solid black;" src="<%= user.avatarUrl ? user.avatarUrl : 'https://discordinflux.xyz/assets/brands/image_k7x1vs.png' %>" class="avatar rounded-circle" alt="{{ERROR LOADING}}" onerror="this.onerror=null; this.src='https://discordinflux.xyz/assets/brands/image_k7x1vs.png'; this.style.border='none';" class="avatar rounded-circle" alt="profile picture" width="70" height="70">
+
+    </div>
+    <div class="text-white">
+      <h5 class="mb-0"><% if(user.username.length > 7) { %>
+          <%= user.username %><a style="color: #999;">#<%= user.discriminator %>
+            <% if (verifiedIds.includes(user.discordId)) { %>
+              <span id="verified-user"><i data-bs-placement="left" data-offset="20" data-bs-toggle="tooltip" class="fad fa-badge-check" style="--fa-primary-color: #ffffff; --fa-secondary-color: #5de1e8;"></i></span>
+            <% } %>
+          </a>
+        <% } else { %>
+          <%= user.username %><a style="color: #999;">#<%= user.discriminator %>
+            <% if (verifiedIds.includes(user.discordId)) { %>
+              <span id="verified-user"><i data-bs-placement="left" data-offset="20" data-bs-toggle="tooltip" class="fad fa-badge-check" style="--fa-primary-color: #ffffff; --fa-secondary-color: #5de1e8;"></i></span>
+            <% } %>
+              
+          </a>
+        <% } %>
+           <% if (verifiedpartnerscardj.includes(user.discordId)) { %>
+              <span id="verified-user"><i data-bs-placement="left" data-offset="20" data-bs-toggle="tooltip" class="fad fa-handshake-alt fa-sm" style="--fa-primary-color: #ffffff; --fa-secondary-color: #cfcb63;"></i></span>
+            <% } %>
+          
+        </h5>
+      <p class="mb-0"><% if (user.bio) { %>
+  <% if (user.bio.length > 68) { %>
+    <p class="card-text" style="color: white;"><%= user.bio.substring(0, 68) + "..." %></p>
+  <% } else { %>
+    <p class="card-text" style="color: white;"><%= user.bio %></p>
+  <% } %>
+<% } else { %>
+  <p class="card-text" style="color: white;">Unfortunately, there is no bio available for this user. The profile has not been set up yet.</p>
+<% } %></p>
+    </div>
+  </div>
+  <div class="card-body">
+   <div class="container">
+  <p class="card-text mb-3 text-white text-center">
+    <div class="d-flex justify-content-center align-items-center mt-3"><i class="fas fa-tags mb-2 mx-2" style="font-size: 10px;"></i>
+     <% if (user.tags && user.tags.length > 0) { %>
+  <% user.tags.forEach(function(tag) { %>
+    <span class="badge me-2 mb-2" style="background-color: #333; color: white;">
+      <a href="https://discordinflux.xyz/search?q=<%= tag %>" style="color: white; text-decoration: none;"><%= tag %></a>
+    </span>
+  <% }); %>
+<% } else { %>
+  <span class="badge me-2 mb-2" style="background-color: #333; color: white;">
+    None
+  </span>
+<% } %>
+
+
+    </div>
+  </p>
+</div>
+
+    <div class="d-flex justify-content-between">
+      <a href="https://discordapp.com/users/<%= user.discordId %>" target="_blank" class="btn flex-grow-1 me-2" style="background-color: #333; color: white;">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-discord " viewBox="0 0 16 16">
+        <path class="mx-1" d="M13.545 2.907a13.227 13.227 0 0 0-3.257-1.011.05.05 0 0 0-.052.025c-.141.25-.297.577-.406.833a12.19 12.19 0 0 0-3.658 0 8.258 8.258 0 0 0-.412-.833.051.051 0 0 0-.052-.025c-1.125.194-2.22.534-3.257 1.011a.041.041 0 0 0-.021.018C.356 6.024-.213 9.047.066 12.032c.001.014.01.028.021.037a13.276 13.276 0 0 0 3.995 2.02.05.05 0 0 0 .056-.019c.308-.42.582-.863.818-1.329a.05.05 0 0 0-.01-.059.051.051 0 0 0-.018-.011 8.875 8.875 0 0 1-1.248-.595.05.05 0 0 1-.02-.066.051.051 0 0 1 .015-.019c.084-.063.168-.129.248-.195a.05.05 0 0 1 .051-.007c2.619 1.196 5.454 1.196 8.041 0a.052.052 0 0 1 .053.007c.08.066.164.132.248.195a.051.051 0 0 1-.004.085 8.254 8.254 0 0 1-1.249.594.05.05 0 0 0-.03.03.052.052 0 0 0 .003.041c.24.465.515.909.817 1.329a.05.05 0 0 0 .056.019 13.235 13.235 0 0 0 4.001-2.02.049.049 0 0 0 .021-.037c.334-3.451-.559-6.449-2.366-9.106a.034.034 0 0 0-.02-.019Zm-8.198 7.307c-.789 0-1.438-.724-1.438-1.612 0-.889.637-1.613 1.438-1.613.807 0 1.45.73 1.438 1.613 0 .888-.637 1.612-1.438 1.612Zm5.316 0c-.788 0-1.438-.724-1.438-1.612 0-.889.637-1.613 1.438-1.613.807 0 1.451.73 1.438 1.613 0 .888-.631 1.612-1.438 1.612Z"/>
+      </svg> Discord</a>
+      <a href="/user/<%= user.discordId %>" class="btn flex-grow-1 ms-2" style="background-color: #222; color: white;">View my Profile</a>
+    </div>
+
+  </div>
+</div>
+        
+      </div>
+      <% }); %>
+    </div>
+
+</div>
+  
+  
+<div class="mt-5">
+<div class="row  mt-5">
+  <div class="col-auto">
+        <h3 class="mb-1"> Trusted Users</h3>
+        <h5 class="text-damp">Get to Know the Top 6 Trusted Users on DiscordInflux!</h5>
+      </div>
+ 
+    </div>
+      <!-- Trusted Users Section -->
+    <div class="container mt-5">
+<div class="row justify-content-center mt-5">
+     <% verifiedUsers.forEach(user => { %>
+
+<div class="col-sm-3 mb-5 mx-5">
+      
+        <div class="card rounded-4 text-white shadow-lg shadow-lg p-99 card-normal" data-toggle="tooltip" data-placement="top" style="width: 364px; height: auto; background-color: #111; border-radius: 10px; overflow: hidden;">
+          
+  <div class="banner d-flex align-items-center" style="background-image: url('<%= user.cardbannerimage ? user.cardbannerimage : 'https://mediashare.ink/file/1683510439225.png' %>'); background-size: cover; height: 150px;" >
+    <div class="avatar-container mx-3">
+      <img style="border: 3px solid black;" src="<%= user.avatarUrl ? user.avatarUrl : 'https://discordinflux.xyz/assets/brands/image_k7x1vs.png' %>" class="avatar rounded-circle" alt="{{ERROR LOADING}}" onerror="this.onerror=null; this.src='https://discordinflux.xyz/assets/brands/image_k7x1vs.png'; this.style.border='none';" class="avatar rounded-circle" alt="profile picture" width="70" height="70">
+
+    </div>
+    <div class="text-white">
+      <h4 class="mb-0"><% if(user.username.length > 7) { %>
+          <%= user.username.slice(0, 7) + "." %><a style="color: #999;">#<%= user.discriminator %>
+            <% if (verifiedIds.includes(user.discordId)) { %>
+              <span id="verified-user"><i data-bs-placement="left" data-offset="20" data-bs-toggle="tooltip" class="fad fa-badge-check" style="--fa-primary-color: #ffffff; --fa-secondary-color: #5de1e8;"></i></span>
+            <% } %>
+          </a>
+        <% } else { %>
+          <%= user.username %><a style="color: #999;">#<%= user.discriminator %>
+            <% if (verifiedIds.includes(user.discordId)) { %>
+              <span id="verified-user"><i data-bs-placement="left" data-offset="20" data-bs-toggle="tooltip" class="fad fa-badge-check" style="--fa-primary-color: #ffffff; --fa-secondary-color: #5de1e8;"></i></span>
+            <% } %>
+               <% if (verifiedpartnerscardj.includes(user.discordId)) { %>
+              <span id="verified-user"><i data-bs-placement="left" data-offset="20" data-bs-toggle="tooltip" class="fad fa-handshake-alt fa-sm" style="--fa-primary-color: #ffffff; --fa-secondary-color: #cfcb63;"></i></span>
+            <% } %>
+          </a>
+        <% } %></h4>
+      <p class="mb-0"><% if (user.bio) { %>
+  <% if (user.bio.length > 68) { %>
+    <p class="card-text" style="color: white;"><%= user.bio.substring(0, 68) + "..." %></p>
+  <% } else { %>
+    <p class="card-text" style="color: white;"><%= user.bio %></p>
+  <% } %>
+<% } else { %>
+  <p class="card-text" style="color: white;">Unfortunately, there is no bio available for this user. The profile has not been set up yet.</p>
+<% } %></p>
+    </div>
+  </div>
+  <div class="card-body">
+   <div class="container">
+  <p class="card-text mb-3 text-white text-center">
+    <div class="d-flex justify-content-center align-items-center mt-3"><i class="fas fa-tags mb-2 mx-2" style="font-size: 10px;"></i>
+     <% if (user.tags && user.tags.length > 0) { %>
+  <% user.tags.forEach(function(tag) { %>
+    <span class="badge me-2 mb-2" style="background-color: #333; color: white;">
+      <a href="https://discordinflux.xyz/search?q=<%= tag %>" style="color: white; text-decoration: none;"><%= tag %></a>
+    </span>
+  <% }); %>
+<% } else { %>
+  <span class="badge me-2 mb-2" style="background-color: #333; color: white;">
+    None
+  </span>
+<% } %>
+
+
+    </div>
+  </p>
+</div>
+
+    <div class="d-flex justify-content-between">
+      <a href="https://discordapp.com/users/<%= user.discordId %>" target="_blank" class="btn flex-grow-1 me-2" style="background-color: #333; color: white;"> <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-discord " viewBox="0 0 16 16">
+        <path class="mx-1" d="M13.545 2.907a13.227 13.227 0 0 0-3.257-1.011.05.05 0 0 0-.052.025c-.141.25-.297.577-.406.833a12.19 12.19 0 0 0-3.658 0 8.258 8.258 0 0 0-.412-.833.051.051 0 0 0-.052-.025c-1.125.194-2.22.534-3.257 1.011a.041.041 0 0 0-.021.018C.356 6.024-.213 9.047.066 12.032c.001.014.01.028.021.037a13.276 13.276 0 0 0 3.995 2.02.05.05 0 0 0 .056-.019c.308-.42.582-.863.818-1.329a.05.05 0 0 0-.01-.059.051.051 0 0 0-.018-.011 8.875 8.875 0 0 1-1.248-.595.05.05 0 0 1-.02-.066.051.051 0 0 1 .015-.019c.084-.063.168-.129.248-.195a.05.05 0 0 1 .051-.007c2.619 1.196 5.454 1.196 8.041 0a.052.052 0 0 1 .053.007c.08.066.164.132.248.195a.051.051 0 0 1-.004.085 8.254 8.254 0 0 1-1.249.594.05.05 0 0 0-.03.03.052.052 0 0 0 .003.041c.24.465.515.909.817 1.329a.05.05 0 0 0 .056.019 13.235 13.235 0 0 0 4.001-2.02.049.049 0 0 0 .021-.037c.334-3.451-.559-6.449-2.366-9.106a.034.034 0 0 0-.02-.019Zm-8.198 7.307c-.789 0-1.438-.724-1.438-1.612 0-.889.637-1.613 1.438-1.613.807 0 1.45.73 1.438 1.613 0 .888-.637 1.612-1.438 1.612Zm5.316 0c-.788 0-1.438-.724-1.438-1.612 0-.889.637-1.613 1.438-1.613.807 0 1.451.73 1.438 1.613 0 .888-.631 1.612-1.438 1.612Z"/>
+      </svg> Discord</a>
+      <a href="/user/<%= user.discordId %>" class="btn flex-grow-1 ms-2" style="background-color: #222; color: white;">View my Profile</a>
+    </div>
+
+  </div>
+</div>
+        
+      </div>
+      <% }); %>
+    </div>
+
+</div>
+
+
+
+    <div class="mt-5">
+<div class="row  mt-5">
+  <div class="col-auto">
+        <h3 class="mb-1">Recently Added</h3>
+        <h5 class="text-damp">Discover Recently Added Users.</h5>
+      </div>
+ 
+    </div>
+    <div class="container mt-5">
+<div class="row justify-content-center mt-5">
+     <% recentlyAdded.forEach(user => { %>
+
+<div class="col-sm-3 mb-5 mx-5">
+      
+        <div class="card rounded-4 text-white shadow-lg shadow-lg p-99 card-normal" data-toggle="tooltip" data-placement="top" style="width: 364px; height: auto; background-color: #111; border-radius: 10px; overflow: hidden;">
+          
+  <div class="banner d-flex align-items-center" style="background-image: url('<%= user.cardbannerimage ? user.cardbannerimage : 'https://mediashare.ink/file/1683510439225.png' %>'); background-size: cover; height: 150px;">
+    <div class="avatar-container mx-3">
+      <img style="border: 3px solid black;" src="<%= user.avatarUrl ? user.avatarUrl : 'https://discordinflux.xyz/assets/brands/image_k7x1vs.png' %>" class="avatar rounded-circle" alt="{{ERROR LOADING}}" onerror="this.onerror=null; this.src='https://discordinflux.xyz/assets/brands/image_k7x1vs.png'; this.style.border='none';" width="70" height="70">
+
+
+    </div>
+    <div class="text-white">
+      <h4 class="mb-0"><% if(user.username.length > 7) { %>
+          <%= user.username.slice(0, 7) + "." %><a style="color: #999;">#<%= user.discriminator %>
+            <% if (verifiedIds.includes(user.discordId)) { %>
+              <span id="verified-user"><i data-bs-placement="left" data-offset="20" data-bs-toggle="tooltip" class="fad fa-badge-check" style="--fa-primary-color: #ffffff; --fa-secondary-color: #5de1e8;"></i></span>
+            <% } %>
+          </a>
+        <% } else { %>
+          <%= user.username %><a style="color: #999;">#<%= user.discriminator %>
+            <% if (verifiedIds.includes(user.discordId)) { %>
+              <span id="verified-user"><i data-bs-placement="left" data-offset="20" data-bs-toggle="tooltip" class="fad fa-badge-check" style="--fa-primary-color: #ffffff; --fa-secondary-color: #5de1e8;"></i></span>
+            <% } %>
+               <% if (verifiedpartnerscardj.includes(user.discordId)) { %>
+              <span id="verified-user"><i data-bs-placement="left" data-offset="20" data-bs-toggle="tooltip" class="fad fa-handshake-alt fa-sm" style="--fa-primary-color: #ffffff; --fa-secondary-color: #cfcb63;"></i></span>
+            <% } %>
+          </a>
+        <% } %></h4>
+      <p class="mb-0"><% if (user.bio) { %>
+  <% if (user.bio.length > 68) { %>
+    <p class="card-text" style="color: white;"><%= user.bio.substring(0, 68) + "..." %></p>
+  <% } else { %>
+    <p class="card-text" style="color: white;"><%= user.bio %></p>
+  <% } %>
+<% } else { %>
+  <p class="card-text" style="color: white;">Unfortunately, there is no bio available for this user. The profile has not been set up yet.</p>
+<% } %></p>
+    </div>
+  </div>
+  <div class="card-body">
+   <div class="container">
+  <p class="card-text mb-3 text-white text-center">
+    <div class="d-flex justify-content-center align-items-center mt-3"><i class="fas fa-tags mb-2 mx-2" style="font-size: 10px;"></i>
+     <% if (user.tags && user.tags.length > 0) { %>
+  <% user.tags.forEach(function(tag) { %>
+    <span class="badge me-2 mb-2" style="background-color: #333; color: white;">
+      <a href="https://discordinflux.xyz/search?q=<%= tag %>" style="color: white; text-decoration: none;"><%= tag %></a>
+    </span>
+  <% }); %>
+<% } else { %>
+  <span class="badge me-2 mb-2" style="background-color: #333; color: white;">
+    None
+  </span>
+<% } %>
+
+
+    </div>
+  </p>
+</div>
+
+    <div class="d-flex justify-content-between">
+      <a href="https://discordapp.com/users/<%= user.discordId %>" target="_blank" class="btn flex-grow-1 me-2" style="background-color: #333; color: white;"> <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-discord " viewBox="0 0 16 16">
+        <path class="mx-1" d="M13.545 2.907a13.227 13.227 0 0 0-3.257-1.011.05.05 0 0 0-.052.025c-.141.25-.297.577-.406.833a12.19 12.19 0 0 0-3.658 0 8.258 8.258 0 0 0-.412-.833.051.051 0 0 0-.052-.025c-1.125.194-2.22.534-3.257 1.011a.041.041 0 0 0-.021.018C.356 6.024-.213 9.047.066 12.032c.001.014.01.028.021.037a13.276 13.276 0 0 0 3.995 2.02.05.05 0 0 0 .056-.019c.308-.42.582-.863.818-1.329a.05.05 0 0 0-.01-.059.051.051 0 0 0-.018-.011 8.875 8.875 0 0 1-1.248-.595.05.05 0 0 1-.02-.066.051.051 0 0 1 .015-.019c.084-.063.168-.129.248-.195a.05.05 0 0 1 .051-.007c2.619 1.196 5.454 1.196 8.041 0a.052.052 0 0 1 .053.007c.08.066.164.132.248.195a.051.051 0 0 1-.004.085 8.254 8.254 0 0 1-1.249.594.05.05 0 0 0-.03.03.052.052 0 0 0 .003.041c.24.465.515.909.817 1.329a.05.05 0 0 0 .056.019 13.235 13.235 0 0 0 4.001-2.02.049.049 0 0 0 .021-.037c.334-3.451-.559-6.449-2.366-9.106a.034.034 0 0 0-.02-.019Zm-8.198 7.307c-.789 0-1.438-.724-1.438-1.612 0-.889.637-1.613 1.438-1.613.807 0 1.45.73 1.438 1.613 0 .888-.637 1.612-1.438 1.612Zm5.316 0c-.788 0-1.438-.724-1.438-1.612 0-.889.637-1.613 1.438-1.613.807 0 1.451.73 1.438 1.613 0 .888-.631 1.612-1.438 1.612Z"/>
+      </svg> Discord</a>
+      <a href="/user/<%= user.discordId %>" class="btn flex-grow-1 ms-2" style="background-color: #222; color: white;">View my Profile</a>
+    </div>
+
+  </div>
+</div>
+        
+      </div>
+      <% }); %>
+    </div>
+
+</div>
+
+
+
+
+              <div class="mt-5">
+<div class="row  mt-5">
+  <div class="col-auto">
+        <h3 class="mb-1">User List - Randoms</h3>
+        <h5 class="text-damp">Explore Our Complete List of Users - Come and See Them All!</h5>
+      </div>
+ 
+    </div>
+
+<div class="row justify-content-center mt-5">
+  <% const randomUsers = users.sort(() => Math.random() - 0.5); %>
+    <% randomUsers.forEach(user => { %>
+    <div class="col-sm-4 mb-4">
+      <div class="card rounded-4 text-white card-normal shadow-lg shadow-lg p-99"  data-toggle="tooltip" data-placement="top"  style="background-image: url('<%= user.cardbannerimage ? user.cardbannerimage : 'https://mediashare.ink/file/1683510439225.png' %>'); background-size: cover; background-position: center; background-repeat: no-repeat; border: none;"
+>
+        <div class="card-body">
+          <div class="row align-items-center">
+            <div class="col-auto">
+              <img src="<%= user.avatarUrl ? user.avatarUrl : 'https://discordinflux.xyz/assets/brands/image_k7x1vs.png' %>" 
+    class="rounded-circle" 
+    width="50" 
+    height="50" 
+    alt="<%= user.username %>#<%= user.discriminator %>" 
+    style="border: 2px solid white;" class="avatar rounded-circle" alt="{{ERROR LOADING}}" onerror="this.onerror=null; this.src='https://discordinflux.xyz/assets/brands/image_k7x1vs.png'; this.style.border='none';">
+
+            </div>
+            <div class="col">
+              <h5 class="card-title mb-0"><% if(user.username.length > 10) { %>
+                <%= user.username.slice(0, 10) + ".." %><a style="color: #999;">#<%= user.discriminator %><% if (verifiedIds.includes(user.discordId)) { %>
+            <span id="verified-user"><i  data-bs-placement="left" data-offset="20" data-bs-toggle="tooltip" class="fad fa-badge-check" style="--fa-primary-color: #ffffff; --fa-secondary-color: #5de1e8;"></i></span>
+          <% } %></a>
+              <% } else { %>
+                
+                <%= user.username %><a style="color: #999;">#<%= user.discriminator %></a><% if (verifiedIds.includes(user.discordId)) { %>
+            <span id="verified-user"><i  data-bs-placement="left" data-offset="20" data-bs-toggle="tooltip" class="fad fa-badge-check" style="--fa-primary-color: #ffffff; --fa-secondary-color: #5de1e8;"></i></span>
+          <% } %>
+ <% if (verifiedpartnerscardj.includes(user.discordId)) { %>
+              <span id="verified-user"><i data-bs-placement="left" data-offset="20" data-bs-toggle="tooltip" class="fad fa-handshake-alt fa-sm" style="--fa-primary-color: #ffffff; --fa-secondary-color: #cfcb63;"></i></span>
+            <% } %>
+              <% } %>
+                          
+              </h5>
+              <% if (user.bio) { %>
+                <div class="<%= user.bio.length > 50 ? 'overflow-y-scroll' : '' %>" style="height: 50px;">
+                  <p class="card-text <%= user.bio.length > 50 ? 'overflow-auto' : '' %>" style="color: white;">
+                    <% if (user.bio.length > 80) { %>
+                      <%= user.bio.substring(0, 80) + "..." %>
+                    <% } else { %>
+                      <%= user.bio %>
+                    <% } %>
+                  </p>
+                </div>
+              <% } else { %>
+                <div class="overflow-y-scroll" style="height: 50px;">
+                  <p class="card-text overflow-auto" style="color: white;">
+                    Unfortunately, there is no bio available for this user. The profile has not been set up yet.
+                  </p>
+                </div>
+              <% } %>
+              
+
+            </div>
+            <div class=" mt-2 text-center" style="height: 0xp; padding-top: 6px;">
+              <a href="https://discordapp.com/users/<%= user.discordId %>" target="_blank" class="btn mx-3" style="background-color: #222; color: white;"> <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-discord " viewBox="0 0 16 16">
+                <path class="mx-1" d="M13.545 2.907a13.227 13.227 0 0 0-3.257-1.011.05.05 0 0 0-.052.025c-.141.25-.297.577-.406.833a12.19 12.19 0 0 0-3.658 0 8.258 8.258 0 0 0-.412-.833.051.051 0 0 0-.052-.025c-1.125.194-2.22.534-3.257 1.011a.041.041 0 0 0-.021.018C.356 6.024-.213 9.047.066 12.032c.001.014.01.028.021.037a13.276 13.276 0 0 0 3.995 2.02.05.05 0 0 0 .056-.019c.308-.42.582-.863.818-1.329a.05.05 0 0 0-.01-.059.051.051 0 0 0-.018-.011 8.875 8.875 0 0 1-1.248-.595.05.05 0 0 1-.02-.066.051.051 0 0 1 .015-.019c.084-.063.168-.129.248-.195a.05.05 0 0 1 .051-.007c2.619 1.196 5.454 1.196 8.041 0a.052.052 0 0 1 .053.007c.08.066.164.132.248.195a.051.051 0 0 1-.004.085 8.254 8.254 0 0 1-1.249.594.05.05 0 0 0-.03.03.052.052 0 0 0 .003.041c.24.465.515.909.817 1.329a.05.05 0 0 0 .056.019 13.235 13.235 0 0 0 4.001-2.02.049.049 0 0 0 .021-.037c.334-3.451-.559-6.449-2.366-9.106a.034.034 0 0 0-.02-.019Zm-8.198 7.307c-.789 0-1.438-.724-1.438-1.612 0-.889.637-1.613 1.438-1.613.807 0 1.45.73 1.438 1.613 0 .888-.637 1.612-1.438 1.612Zm5.316 0c-.788 0-1.438-.724-1.438-1.612 0-.889.637-1.613 1.438-1.613.807 0 1.451.73 1.438 1.613 0 .888-.631 1.612-1.438 1.612Z"/>
+              </svg> Discord Profile</a></a> 
+              <a href="/user/<%= user.discordId %>" class="btn" style="background-color: #222; color: white;">View Profile</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% }); %>
+</div>
+
+
+    <!-- Add Bootstrap JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.min.js" integrity="sha512-BvD74n4WmFQbIw3qne3LEnSohA1Jkj2FNozXdqksynd03C+xpW1Vf5kEJCUkmZ+ihP5r5GJPoJxKXa7G84f1lA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script>
+      // Center user cards if there is only one
+      if (document.querySelectorAll('.card').length === 1) {
+        document.querySelector('.justify-content-center').classList.add('align-items-center');
+      }
+    </script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9750247758090908"
+     crossorigin="anonymous"></script>
+<!-- DesTools -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-9750247758090908"
+     data-ad-slot="6742221258"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<%- include('partials/footer'); -%>
+  <script>$(function () {
+  $('[data-toggle="tooltip"]').tooltip({
+    trigger: 'manual'
+  }).on('mouseenter', function () {
+    $(this).tooltip('show')
+    $(this).removeClass('card-normal').addClass('card-hover')
+  }).on('mouseleave', function () {
+    $(this).tooltip('hide')
+    $(this).removeClass('card-hover').addClass('card-normal')
+  })
+})
+
+</script>
+<style>.card {
+  transition: margin-top 0.3s ease;
+}
+
+  .card-hover {
+  margin-top: -10px;
+}
+
+</style>
+</body>
+</html>

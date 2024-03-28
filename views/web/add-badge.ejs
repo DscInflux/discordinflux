@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Add Badge</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-9oTj+eTmJnwkxLWqv+8Uv7B/UPg6UAmJ/2+XQDAv7VbLzNfvJ7xJZ0R7ZwD2fvA2+TWs+lXyugJq3FvpyzLgg==" crossorigin="anonymous" />
+  </head>
+  <body>
+    <h1>Add Badge</h1>
+    <form action="/user/addBadge" method="post">
+      <label for="badgeName">Badge Name:</label>
+      <input type="text" id="badgeName" name="badgeName" required>
+      <br>
+      <label for="badgeIcon">Badge Icon:</label>
+      <input type="text" id="badgeIcon" name="badgeIcon" required>
+      <i class="<%= badgeIcon %>"></i>
+      <br>
+      <input type="submit" value="Add Badge">
+    </form>
+  </body>
+</html>

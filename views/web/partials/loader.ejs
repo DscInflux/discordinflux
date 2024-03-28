@@ -1,0 +1,79 @@
+<WEBLOADER>
+  <style>
+    #loading-page {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-image: linear-gradient(to left, #040209, #0d0c0c);
+      background-color: #fff;
+      z-index: 9999;
+      opacity: 1;
+      transition: opacity 0.5s ease-out;
+    }
+  
+    #loading-page.fade-out {
+      opacity: 0;
+    }
+  
+    .loading-icon {
+      margin-right: 10px;
+    }
+  
+    .loading-text {
+      font-size: 18px;
+    }
+  
+    .funnymsg {
+      color: #999;
+    }
+  </style>
+  
+  <div id="loading-page">
+    <div class="text-white text-center" role="status">
+      <span class="loading-icon"><i class="fas fa-spinner fa-spin"></i></span>
+      <span class="loading-text">Please wait while we load the page for you...</span>
+      <p class="loading-text funnymsg"></p>
+    </div>
+  </div>
+  
+  <script>
+    const messages = [
+      "Just a moment, we're almost there!",
+      "Hold on tight, the page is loading!",
+      "Patience, it's worth the wait!",
+      "Preparing a surprise for you!",
+      "Ran was here!! 😄",
+      "Buckle up, we're about to reach warp speed!",
+      "Sit back, relax, and enjoy the loading show!",
+      "In the meantime, let's practice some virtual patience exercises!",
+      "Please wait while we bribe the hamsters running the servers!",
+      "Loading progress: 99.9% sweat, 0.1% magic!",
+    ];
+  
+    function displayRandomMessage() {
+      const randomIndex = Math.floor(Math.random() * messages.length);
+      const funnyMsg = document.querySelector(".funnymsg");
+      funnyMsg.textContent = messages[randomIndex];
+    }
+  
+    function fadeOutLoadingPage() {
+      const loadingPage = document.getElementById("loading-page");
+      loadingPage.classList.add("fade-out");
+  
+      setTimeout(function () {
+        loadingPage.remove();
+      }, 1000);
+    }
+  
+    window.addEventListener("load", function () {
+      displayRandomMessage();
+      setTimeout(fadeOutLoadingPage, 5000);
+    });
+  </script>
+  
+</WEBLOADER>

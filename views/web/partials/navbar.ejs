@@ -1,0 +1,216 @@
+<nav class="navbar sticky-top navbar-expand-lg navbar-custom" style="background-image: linear-gradient(to left, #040209, #0d0c0c); color: white; padding: 30px;">
+  <div class="container-md">
+    <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <a class="navbar-brand logoholder d-flex align-items-center" href="/">
+      <div class="logo-wrapper me-3"></div>
+      <div class="brand-text text-white flex-grow-1">
+        Discord<span id="change-text-color-display" style="color: #90EDF8;">Influx</span>
+      </div>
+    </a>
+    <div class="offcanvas offcanvas-end border-0 txb-box" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+      <div class="offcanvas-header">
+        <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Menu</h5>
+        <button type="button" class="btn-close text-white" style="color: white;" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+      </div>
+      <div class="offcanvas-body">
+        <div class="vr d-none d-md-flex" style="color: #999; height: 40px;"></div>
+        <div class="nav justify-content-end">
+          <a class="nav-link" href="/support">Support</a>
+          <a class="nav-link" href="/partners">Partners</a>
+          <div class="dropdown-center">
+            <a class="btn nav-link dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+              More
+            </a>
+            <ul style="color: white;" class="txb animate slideIn dropdown-menu shadow-lg p-6 border-0 dropdown-menu-center">
+              <li><a style="color: white; cursor: pointer;" class="dropdown-item txb" data-bs-toggle="modal" data-bs-target="#dmcaModal"><i class="fad fa-copyright"></i> DMCA Notice</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper-base.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.min.js"></script>
+    <form action="/search" method="get" class="d-none d-md-flex ms-auto" role="search">
+      <div class="input-group">
+        <input class="form-control border-0 " name="q" id="searchInput" style="background-color: #100e17; color: white; border-color: initial; box-shadow: none; width: 230px;" autocomplete="off" placeholder="Find your Discord Friend...">
+        <button type="submit" class="input-group-text border-0 me-2 txb rounded-left-4 " style="border-top-right-radius: 4px; border-bottom-right-radius: 4px;color: white; cursor: pointer;"><i class="fas fa-search"></i></button>
+        <div id="searchResultsContainer" class="shadow p-3 search-results-container container animate slideIn mt-3 rounded-4 list-group" style="background-color: #100e17;"></div>
+      </div>
+    </form>
+
+    <style>
+      .search-results-container {
+        display: none;
+        padding: 10px;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        z-index: 999;
+      }
+    </style>
+    
+    <!-- Search results container -->
+    
+    <script>
+      // Handle the search input keyup event
+      document.getElementById('searchInput').addEventListener('keyup', function() {
+        const query = this.value;
+    
+        // Check if the query is not empty
+        if (query.trim() !== '') {
+          fetch('/realtimesearch?q=' + query)
+            .then(response => response.json())
+            .then(data => {
+              const searchResultsContainer = document.getElementById('searchResultsContainer');
+    
+              // Clear the previous search results
+              searchResultsContainer.innerHTML = '';
+    
+              // Check if there are search results
+              if (data.users.length > 0) {
+                // Generate the HTML content for the search results
+                const resultsHTML = data.users.map(user => {
+                  let html = `
+
+    <a href="/user/${user.discordId}" class="rounded-4 mt-1 list-group-item border-0 mkl d-flex align-items-center" style="padding: 7px;">
+      <img src="${user.avatarUrl}" class="rounded-circle mr-3" style="background-color: #222;" width="40" height="40">
+      <div>
+        <p class="mb-0 text-white mx-2">${user.username}</p>
+      </div>
+    </a>
+
+
+                  `;
+    
+                  // Check if the user has tags
+    
+                  return html;
+                }).join('');
+    
+                // Append the HTML content to the search results container
+                searchResultsContainer.innerHTML = resultsHTML;
+    
+                // Show the search results container
+                searchResultsContainer.style.display = 'block';
+              } else {
+                // Hide the search results container if there are no results
+                searchResultsContainer.style.display = 'none';
+              }
+            })
+            .catch(error => {
+              console.error(error);
+            });
+        } else {
+          // Hide the search results container if the query is empty
+          document.getElementById('searchResultsContainer').style.display = 'none';
+        }
+      });
+    </script>
+    
+ 
+    <% if (authenticated) { %>
+      <span class="navbar-text" style="color: white;">
+        <div class="dropdown-center" style="color: white;">
+          <a class="btn shadow-none" style="border:none !important;color: white;" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <img src="<%= authenticated.avatarUrl ? authenticated.avatarUrl : 'https://discordinflux.xyz/assets/brands/image_k7x1vs.png' %>" class="rounded-circle" width="40" height="40" alt="<%= authenticated.username %>#<%= authenticated.discriminator %>" style="background-color: #111; color: white !important;">
+          </a>
+          <ul style="color: white !important;" class="dropdown-menu animate slideIn slideout shadow-lg p-6 txb-box text-white border-0 dropdown-menu-center mt-3">
+            <li><a class="dropdown-item" style="color: white;" href="/dashboard"><i class="fad fa-tachometer-alt mr-2"></i> Dashboard</a></li>
+            <li><a class="dropdown-item" style="color: white;" href="/user/<%= authenticated.discordId %>"><i class="fad fa-user"></i> My Profile</a>
+              <% if (authenticated.isAdmin) { %>
+                <li><a class="dropdown-item" style="color: white;" href="/user/<%= authenticated.discordId %>"><i class="fad fa-user"></i> Admin panel</a></li>
+              <% } %>
+              <li><a class="dropdown-item" style="color: white;" href="/logout"><i class="fad fa-sign-out mr-2"></i> Logout</a></li>
+            </ul>
+          </div>
+        </span>
+      <% } else { %>
+        <form class="d-flex">
+          <a href="#" onclick="openAuthPopup()" class="btn mx-1 txb"><i class="fad fa-sign-in-alt"></i> Login</a>
+        </form>
+        <script>
+          function openAuthPopup() {
+            var width = 500;
+            var height = 800;
+            var left = (screen.width / 2) - (width / 2);
+            var top = (screen.height / 2) - (height / 2);
+            var authPopup = window.open('/login', 'Discord Auth', 'width=' + width + ', height=' + height + ', top=' + top + ', left=' + left);
+      
+            // Add an event listener to detect when the popup window is closed
+            window.addEventListener('message', function(event) {
+            // Check if the message indicates authentication completion
+            if (event.data === 'authComplete') {
+              // Refresh the main page
+              window.location.reload();
+            }
+          });
+      
+            authPopup.focus();
+          }
+        </script>
+      <% } %>
+
+      <style>
+        .navbar-custom .nav-link {
+          color: #fff;
+        }
+
+        .navbar-custom {
+          background-color: #333;
+        }
+
+        .btn:focus,
+        .btn:active {
+          outline: none !important;
+          box-shadow: none !important;
+        }
+
+        .navbar.scrolled {
+          background-color: #333;
+          color: white;
+        }
+      </style>
+      <script>
+        $(document).ready(function() {
+          $(window).scroll(function() {
+            if ($(this).scrollTop() > 50) {
+              $('.navbar').addClass('scrolled');
+            } else {
+              $('.navbar').removeClass('scrolled');
+            }
+          });
+        });
+
+        
+      </script>
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    </div>
+  </nav>
+  <div class="modal fade" id="dmcaModal" tabindex="-1" aria-labelledby="dmcaModalLabel" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
+    <div class="modal-dialog modal-dialog-centered rounded-3">
+      <div class="modal-content text-white" style="background-color: #111;">
+        <div class="modal-header border-0">
+          <h5 class="modal-title" id="dmcaModalLabel">DMCA Notice</h5>
+        </div>
+        <div id="error-message"></div>
+        <div class="modal-body">
+          <p>This website is protected by the <a target="_blank" href="https://www.dmca.com/compliance/discordinflux.xyz" class="text-info">DMCA</a>. We have all rights to take legal action against your website if it copies ours.</p>
+          <div class="mb-3 text-center">
+            <a target="_blank" href="//www.dmca.com/Protection/Status.aspx?ID=4375b5f3-ae1f-4c63-8104-068ccfe0d728" title="DMCA.com Protection Status" class="dmca-badge">
+              <img src="https://images.dmca.com/Badges/dmca-badge-w250-5x1-08.png?ID=4375b5f3-ae1f-4c63-8104-068ccfe0d728" alt="DMCA.com Protection Status" />
+            </a>
+            <script src="https://images.dmca.com/Badges/DMCABadgeHelper.min.js"></script>
+          </div>
+        </div>
+        <hr class="rounded-3" style="margin: auto; width:80%; height: 10px; background-color: #000; border: none;">
+        <div class="modal-footer border-0">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
